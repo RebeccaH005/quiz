@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>BrainZap</title>
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="style.css">
         <meta name="description" content="">
 
         <meta property="og:title" content="">
@@ -24,13 +24,13 @@
 
     <body>
         <header>
-            <div class="header-container">
+             <div class="header-container">
                 <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Logo" /><span class="name">BrainZap</span></a></div>
                 <nav class="navbar">
                     <ul class="nav-links">
                         <li><a href="geography.html">Geography</a></li>
                         <li><a href="history.html">History</a></li>
-                        <li><a href="#">Science</a></li>
+                        <li><a href="science.html">Science</a></li>
                         <li><a href="wordpuzzle.html">Word Puzzle</a></li>
                     </ul>
                     <div class="menu-toggle">☰</div>
@@ -38,19 +38,11 @@
             </div>
         </header>
 
-        <div class="quiz-container content">
-            <form>
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name"><br>
-                <label for="Subject">Subject:</label><br>
-                <input type="text" id="Subject" name="Subject"><br>  
-                <label for="message">Message:</label><br>
-                <textarea id="message" name="message" rows="4" cols="50">
-                </textarea><br>
+        <section class="quiz-container content">
 
-                <input type="submit" value="Submit">
-            </form>
-        </div>
+            <h1>Word Puzzle</h1>
+
+        <section>
 
         <footer>
             <p>Copyright &copy; 2025 BrainZap</p>
@@ -62,7 +54,6 @@
             </ul>
         </footer>
 
-        <script src="js/trivia.js"></script>
-        <script src="js/hamburger.js"></script>
+        <script src="js/puzzle.js"></script>
     </body>
 </html>
