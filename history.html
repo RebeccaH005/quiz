@@ -1,0 +1,197 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BrainZap</title>
+        <link rel="stylesheet" href="css/style.css">
+        <meta name="description" content="">
+
+        <meta property="og:title" content="">
+        <meta property="og:type" content="">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="">
+        <meta property="og:image:alt" content="">
+
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/icon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="icon.png">
+
+        <link rel="manifest" href="site.webmanifest">
+        <meta name="theme-color" content="#fafafa">
+    </head>
+
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="logo"><a href="index.html"><img src="img/logo.jpg" alt="Logo" /><span class="name">BrainZap</span></a></div>
+                <nav class="navbar">
+                    <ul class="nav-links">
+                        <li><a href="geography.html">Geography</a></li>
+                        <li><a href="history.html">History</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="wordpuzzle.html">Word Puzzle</a></li>
+                    </ul>
+                    <div class="menu-toggle">☰</div>
+                </nav>
+            </div>
+        </header>
+
+        <div class="quiz-container content">
+            <div class="quiz-header">
+                <h2>History Quiz</h2>
+                <div class="quiz-controls">
+                    <!--<select id="difficulty-select">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>-->
+                    <button id="start-quiz">Start Quiz</button>
+                </div>
+            </div>
+            
+            <!-- Progress indicators will appear here -->
+            <div id="progress-container" class="progress-container"></div>
+            
+            <!-- Questions will appear here -->
+            <div id="questions-container" class="questions-container">
+                <div id="question1-slide" style="display:block">
+                    <div id="question1">How many wives did Henry VIII have?</div>
+                    <button onclick="question_wrong(1)">5</button>
+                    <button onclick="question_wrong(1)">8</button>
+                    <button onclick="question_right(1)">6</button>
+
+                </div>
+                
+                <div id="question2-slide" style="display:none">
+                    <div id="question2">Who discovered penicillin?</div>
+                    <button onclick="question_right(2)">Alexander Flemming</button>
+                    <button onclick="question_wrong(2)">8</button>
+                    <button onclick="question_wrong(2)">6</button>
+                </div>
+                
+                <div id="question3-slide" style="display:none">
+                    <div id="question3">How many wives did Henry VIII have?</div>
+                    <button onclick="question_wrong(3)">5</button>
+                    <button onclick="question_right(3)">8</button>
+                    <button onclick="question_wrong(3)">6</button>
+                </div>
+                
+                <div id="question4-slide" style="display:none">
+                    <div id="question4">How many wives did Henry VIII have?</div>
+                    <button onclick="question_right(4)">5</button>
+                    <button onclick="question_wrong(4)">8</button>
+                    <button onclick="question_wrong(4)">6</button>
+                </div>
+                
+                <div id="question5-slide" style="display:none">
+                    <div id="question5">How many wives did Henry VIII have?</div>
+                    <button onclick="question_wrong(5)">5</button>
+                    <button onclick="question_wrong(5)">8</button>
+                    <button onclick="question_right(5)">6</button>
+                </div>
+
+                <script>
+                    var score = 0;
+
+                    function question_wrong(count) {
+                        var num = count;
+                        document.getElementById("question" + num + "-wrong").style.display = "block";
+                        document.getElementById("question" + num + "-slide").style.display = "none";
+                    }
+                    
+                    function question_right(count) {
+                        var num = count;
+                        score = score + 1;
+                        document.getElementById("question" + num + "-right").style.display = "block";
+                        document.getElementById("question" + num + "-slide").style.display = "none";
+                        document.getElementById("result").innerHTML = score;
+                        console.log(score);
+                    }
+
+                    function nextQuestion(count) {
+                        var previous = count - 1;
+                        var num = count;
+                        document.getElementById("question" + previous + "-right").style.display = "none";
+                        document.getElementById("question" + previous + "-wrong").style.display = "none";
+                        document.getElementById("question" + num + "-slide").style.display = "block";
+                    }
+
+                    function finish() {
+                        document.getElementById("question5-right").style.display = "none";
+                        document.getElementById("question5-wrong").style.display = "none";
+                        document.getElementById("final_score").style.display = "block";
+                    }
+                </script>
+
+                <div id="question1-wrong" style="display:none">
+                    Incorrect
+                    <button onclick="nextQuestion(2)">Next Question</button>
+                </div>
+
+                <div id="question1-right" style="display:none">
+                    Correct
+                    <button onclick="nextQuestion(2)">Next Question</button>
+                </div>
+
+                <div id="question2-wrong" style="display:none">
+                    Incorrect
+                    <button onclick="nextQuestion(3)">Next Question</button>
+                </div>
+
+                <div id="question2-right" style="display:none">
+                    Correct
+                    <button onclick="nextQuestion(3)">Next Question</button>
+                </div>
+
+                <div id="question3-wrong" style="display:none">
+                    Incorrect
+                    <button onclick="nextQuestion(4)">Next Question</button>
+                </div>
+
+                <div id="question3-right" style="display:none">
+                    Correct
+                    <button onclick="nextQuestion(4)">Next Question</button>
+                </div>
+
+                <div id="question4-wrong" style="display:none">
+                    Incorrect
+                    <button onclick="nextQuestion(5)">Next Question</button>
+                </div>
+
+                <div id="question4-right" style="display:none">
+                    Correct
+                    <button onclick="nextQuestion(5)">Next Question</button>
+                </div>
+
+                <div id="question5-wrong" style="display:none">
+                    Incorrect
+                    <button onclick="finish()">Finish</button>
+                </div>
+
+                <div id="question5-right" style="display:none">
+                    Correct
+                    <button onclick="finish()">Finish</button>
+                </div>
+
+                <div id="final_score" style="display:none">
+                    Your Score: 
+                    <span id="result"></span>/5
+                    <a href="index.html">Home</a>
+                </div>
+
+            </div>
+            
+            <!-- Navigation buttons will appear here -->
+            <div id="navigation-container" class="navigation-container"></div>
+        </div>
+
+        <footer>
+            <p>Whatever</p>
+        </footer>
+
+        <script src="js/trivia.js"></script>
+        <script src="js/hamburger.js"></script>
+    </body>
+</html>
