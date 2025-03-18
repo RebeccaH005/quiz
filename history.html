@@ -39,7 +39,7 @@
         </header>
 
         <div class="quiz-container content">
-            <div class="quiz-header">
+            <div class="quiz-header" id="start_quiz">
                 <h2>History Quiz</h2>
                 <div class="quiz-controls">
                     <!--<select id="difficulty-select">
@@ -47,7 +47,8 @@
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                     </select>-->
-                    <button id="start-quiz">Start Quiz</button>
+                    <button onclick="start_quiz()">Start Quiz</button>
+
                 </div>
             </div>
             
@@ -56,7 +57,7 @@
             
             <!-- Questions will appear here -->
             <div id="questions-container" class="questions-container">
-                <div id="question1-slide" style="display:block">
+                <div id="question1-slide" style="display:none">
                     <div id="question1">How many wives did Henry VIII have?</div>
                     <button onclick="question_wrong(1)">5</button>
                     <button onclick="question_wrong(1)">8</button>
@@ -94,6 +95,11 @@
 
                 <script>
                     var score = 0;
+
+                    function start_quiz() {
+                        document.getElementById("question1-slide").style.display = "block";
+                        document.getElementById("start_quiz").style.display = "none";
+                    }
 
                     function question_wrong(count) {
                         var num = count;
