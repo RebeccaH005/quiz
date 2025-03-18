@@ -283,6 +283,13 @@
     font-weight: 700;
     color: #333; 
   }
+  .search {
+    display: flex;
+    margin-top: 15px;
+  }
+  .search a {
+    margin-right: 20px;
+  }
 
   /* Hero section styles */
   .hero {
