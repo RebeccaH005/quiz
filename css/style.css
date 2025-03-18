@@ -441,8 +441,23 @@
   body > footer {
     position: sticky;
     top: 100vh;
+    display: flex;
+    justify-content: space-between;
+  }
+  .social-links {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    
   }
 
+  .social-links li {
+    margin: 10px;
+  }
+  .social-links li img {
+    width: 30px;
+    height: auto;
+  }
   /* Quiz page common styles including top navigation bar */
 
   .navbar {
