@@ -782,6 +782,9 @@
     max-width: 750px;
   }
 
+  .feedback-page-left img {
+    max-width: 350px;
+  }
   .feedback-page-right img{
     max-width:350px ;
     margin-top: 95px;
