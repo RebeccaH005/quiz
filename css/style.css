@@ -291,6 +291,23 @@
     margin-right: 20px;
   }
 
+  .search input[type="submit"]{
+    background-color: rgb(76, 175, 80);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 8px 20px;
+    font-size: 1em;
+  }
+
+  .search input[type="text"]{
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: 2px black dotted;
+  font-size: 1em;
+  }
+  
+
   /* Hero section styles */
   .hero {
     width: 100%;
