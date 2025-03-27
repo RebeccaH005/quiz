@@ -42,6 +42,57 @@
 
             <h1>Word Puzzle</h1>
 
+            <div>
+                <div>
+                    Score: <span id="score">0</span>
+                </div>
+                
+                <div>
+                    Time: <span id="timer">120</span>s
+                </div>
+                
+                <div id="message" class="message"></div>
+                
+                <div id="word-container"></div>
+                
+                <div id="letter-container"></div>
+                
+                <div>
+                    <button id="submit">Submit Word</button>
+                    <button id="shuffle">Shuffle</button>
+                    <button id="clear">Clear</button>
+                    <button id="new-game">New Game</button>
+                </div>
+                
+                <div class="completed-words">
+                    <div>
+                        <h3>3-Letter</h3>
+                        <ul id="three-letter-words"></ul>
+                    </div>
+                    <div>
+                        <h3>4-Letter</h3>
+                        <ul id="four-letter-words"></ul>
+                    </div>
+                    <div>
+                        <h3>5-Letter</h3>
+                        <ul id="five-letter-words"></ul>
+                    </div>
+                    <div>
+                        <h3>6-Letter</h3>
+                        <ul id="six-letter-words"></ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="game-over-modal" style="display: none;">
+                <div>
+                    <h2>Game Over!</h2>
+                    <p>Your final score: <span id="final-score">0</span></p>
+                    <p>Words found: <span id="words-found">0</span>/<span id="total-words">0</span></p>
+                    <button id="play-again">Play Again</button>
+                </div>
+            </div>
+
         <section>
 
         <footer>
