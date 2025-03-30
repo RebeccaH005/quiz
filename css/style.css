@@ -466,20 +466,23 @@
 
   body > footer {
     position: sticky;
+    max-width:1200px;
+    margin:0 auto;
     top: 100vh;
     display: flex;
     justify-content: space-between;
   }
+
   .social-links {
     display: flex;
     list-style: none;
-    justify-content: space-around;
-    
+    justify-content: space-around;  
   }
 
   .social-links li {
     margin: 10px;
   }
+
   .social-links li img {
     width: 30px;
     height: auto;
@@ -794,6 +797,10 @@
 
   .completed-words div {
     margin-right: 20px;
+  }
+
+  #game-over-modal {
+    display: none;
   }
 
 
