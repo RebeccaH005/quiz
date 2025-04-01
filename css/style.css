@@ -465,12 +465,21 @@
   }
 
   body > footer {
+    background-color: #ddd;
     position: sticky;
+    top: 100vh;
+    max-height: 100px;
+    
+  }
+  .footer-content{
+    /*padding: 25px 10px;*/
     max-width:1200px;
     margin:0 auto;
-    top: 100vh;
     display: flex;
     justify-content: space-between;
+  }
+  .footer-content p {
+    margin-top: 35px;
   }
 
   .social-links {
@@ -868,21 +877,22 @@
 
   /*   Feedback page styling   */
 
-  .feedback-page{
+  .feedback-page,
+  .thankyou-page{
     display:flex;
     justify-content: space-between;
   }
 
   .feedback-page-left {
     max-width: 750px;
+    font-size: 1.4em;
+    text-align: justify;
   }
 
-  .feedback-page-left img {
-    max-width: 350px;
-  }
+
   .feedback-page-right img{
-    max-width:350px ;
-    margin-top: 95px;
+    max-width: 350px ;
+    margin-top: 105px;
   }
 
   .feedback input[type="submit"]{
@@ -909,5 +919,28 @@
     font-size: 1.1em;
   }
 
-  
-  
+  /* Thnak you page styling*/
+
+  .thankyou-page {
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .thankyou-page-left img {
+    max-width: 350px;
+  }
+  .thankyou-page-right {
+    padding: 10px 50px 0 50px;
+    font-size: 1.6em;
+    text-align: justify;
+
+  }
+
+  .thankyou-page-right h1 {
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    .thankyou-page {
+      flex-direction: column;
+    }
+  }
