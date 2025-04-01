@@ -41,6 +41,13 @@
         <section class="quiz-container content">
 
             <h1>Word Puzzle</h1>
+            <div id="start-game-modal" class="modal-overlay">
+                <div class="modal-content">
+                    <p>Click on available letters to move them to the letter box. If you move a letter into the box by mistake, click on it to remove it.</p>
+                    <p>Find as many words as you can in 120 seconds!</p>
+                    <button id="start-game">Start Game</button>
+                </div>
+            </div>
 
             <div>
                 <div>
@@ -57,7 +64,7 @@
                 
                 <div id="letter-container"></div>
                 
-                <div>
+                <div id="game-controls" class="disabled">
                     <button id="submit">Submit Word</button>
                     <button id="shuffle">Shuffle</button>
                     <button id="clear">Clear</button>
@@ -84,16 +91,16 @@
                 </div>
             </div>
             
-            <div id="game-over-modal" style="display: none;">
-                <div>
+            <div id="game-over-modal" class="modal-overlay">
+                <div class="modal-content">
                     <h2>Game Over!</h2>
                     <p>Your final score: <span id="final-score">0</span></p>
-                    <p>Words found: <span id="words-found">0</span>/<span id="total-words">0</span></p>
+                    <p>Words found: <span id="words-found">0</span> / <span id="total-words">0</span></p>
                     <button id="play-again">Play Again</button>
                 </div>
             </div>
 
-        <section>
+        </section>
 
         <footer>
             <p>Copyright &copy; 2025 BrainZap</p>
@@ -106,5 +113,6 @@
         </footer>
 
         <script src="js/puzzle.js"></script>
+        <script src="js/hamburger.js"></script>
     </body>
 </html>
