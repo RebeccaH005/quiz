@@ -935,6 +935,20 @@
     font-size: 1.1em;
   }
 
+<<<<<<< HEAD
+  #start-quiz {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+  }
+
+  
+  
+=======
   /* Thnak you page styling*/
 
   .thankyou-page {
@@ -961,3 +975,4 @@
     }
   }
 
+>>>>>>> 103bc49088bbe1789e1fe1db48fb02eaf25ba6b8
