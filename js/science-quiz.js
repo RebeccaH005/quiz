@@ -140,3 +140,18 @@ renderQuestion() {
         this.navigationContainer.appendChild(prevButton);
         this.navigationContainer.appendChild(nextButton);
     }
+
+// Function to decode HTML in questions and nswers
+function decodeHTMLEntities(text) {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = text;
+    return textArea.value;
+}
+
+// Function to shuffle array elements (Fisher-Yates shuffle algorithm)
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
