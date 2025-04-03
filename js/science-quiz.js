@@ -28,7 +28,7 @@ class QuizManager {
         this.userAnswers = []; // Stores user-selected answers
     }
     
-    // Initiates quiz questions function
+    // Load and initiates quiz questions function
     // This function is called when quiz questions are fetched
     loadQuestions(questions) {
         this.questions = questions;
@@ -38,4 +38,105 @@ class QuizManager {
         this.renderNavigation(); // Shows navigation buttons
         this.updateProgress(); // Update progress bar
     }
+} 
+
+    // Displays the current question with answer choices
+renderQuestion() {
+    this.questionsContainer.innerHTML = ''; // Clear previous question
+    if (this.questions.length === 0) return; // If no questions, do nothing
+    
+    const question = this.questions[this.currentQuestionIndex]; // Get current question
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'question-container'; // Assign class for styling
+    
+    // Display question number
+    const questionNumber = document.createElement('div');
+    questionNumber.className = 'question-number';
+    questionNumber.textContent = `Question ${this.currentQuestionIndex + 1} of ${this.questions.length}`;
+    questionDiv.appendChild(questionNumber);
+    
+    // Display question text
+    const questionText = document.createElement('h3');
+    questionText.innerHTML = decodeHTMLEntities(question.question);
+    questionDiv.appendChild(questionText);
+    
+    // Container for answer options
+    const answersDiv = document.createElement('div');
+    answersDiv.className = 'answers-container';
+    
+    // Join correct and incorrect answers and shuffle them
+    const answers = [...question.incorrect_answers, question.correct_answer];
+    if (!question.answersShuffled) {
+        shuffleArray(answers); // Mix answer order
+        question.answersShuffled = true;
+        question.shuffledAnswers = [...answers];
+    } else {
+        answers.length = 0;
+        answers.push(...question.shuffledAnswers);
+    }
+    
+    // Create radio buttons for each answer option
+    answers.forEach((answer, index) => {
+        const answerLabel = document.createElement('label');
+        answerLabel.className = 'answer-option'; // Assign styling class
+        
+        const radioInput = document.createElement('input');
+        radioInput.type = 'radio'; // Set input type to radio button
+        radioInput.name = `current-question`; // Group answers by question
+        radioInput.value = answer; // Store answer value
+        radioInput.id = `answer-${index}`;
+        
+        // Mark previously selected answer as checked
+        if (this.userAnswers[this.currentQuestionIndex] === answer) {
+            radioInput.checked = true;
+        }
+        
+        // Event listener to update selected answer
+        radioInput.addEventListener('change', () => {
+            this.userAnswers[this.currentQuestionIndex] = answer;
+            this.updateProgress(); // Refresh progress indicator
+        });
+        
+        const answerText = document.createElement('span');
+        answerText.innerHTML = decodeHTMLEntities(answer);
+        
+        answerLabel.appendChild(radioInput);
+        answerLabel.appendChild(answerText);
+        answersDiv.appendChild(answerLabel);
+    });
+    
+    questionDiv.appendChild(answersDiv);
+    this.questionsContainer.appendChild(questionDiv);
 }
+
+//Navigation buttons that controls movement between questions (Previous, Next, Submit)
+    renderNavigation() {
+        this.navigationContainer.innerHTML = ''; // Clear previous buttons
+        
+        const prevButton = document.createElement('button');
+        prevButton.textContent = 'Previous';
+        prevButton.disabled = this.currentQuestionIndex === 0; // Disable if at first question
+        prevButton.addEventListener('click', () => {
+            if (this.currentQuestionIndex > 0) {
+                this.currentQuestionIndex--;
+                this.renderQuestion();
+                this.renderNavigation();
+                this.updateProgress();
+            }
+        });
+        
+        const nextButton = document.createElement('button');
+        nextButton.textContent = 'Next';
+        nextButton.disabled = this.currentQuestionIndex === this.questions.length - 1; // Disable if last question
+        nextButton.addEventListener('click', () => {
+            if (this.currentQuestionIndex < this.questions.length - 1) {
+                this.currentQuestionIndex++;
+                this.renderQuestion();
+                this.renderNavigation();
+                this.updateProgress();
+            }
+        });
+        
+        this.navigationContainer.appendChild(prevButton);
+        this.navigationContainer.appendChild(nextButton);
+    }
