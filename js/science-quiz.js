@@ -41,7 +41,8 @@ class QuizManager {
 } 
 
     // Displays the current question with answer choices
-renderQuestion() {
+renderQuestion() 
+{
     this.questionsContainer.innerHTML = ''; // Clear previous question
     if (this.questions.length === 0) return; // If no questions, do nothing
     
@@ -110,7 +111,8 @@ renderQuestion() {
 }
 
 //Navigation buttons that controls movement between questions (Previous, Next, Submit)
-    renderNavigation() {
+    renderNavigation() 
+    {
         this.navigationContainer.innerHTML = ''; // Clear previous buttons
         
         const prevButton = document.createElement('button');
@@ -155,3 +157,30 @@ function shuffleArray(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+// Initialize quiz on page load 
+document.addEventListener('DOMContentLoaded', () => {
+    const questionsContainer = document.getElementById('questions-container');
+    const navigationContainer = document.getElementById('navigation-container');
+    const progressContainer = document.getElementById('progress-container');
+    const startButton = document.getElementById('start-quiz');
+    
+    const quizManager = new QuizManager(questionsContainer, navigationContainer, progressContainer);
+    
+    startButton.addEventListener('click', async () => {
+        const category = document.getElementById('category-select').value;
+        const difficulty = document.getElementById('difficulty-select').value;
+        
+        questionsContainer.innerHTML = '<p class="loading">Loading questions...</p>';
+        navigationContainer.innerHTML = '';
+        progressContainer.innerHTML = '';
+        document.querySelector('.quiz-controls').style.display = 'none';
+        
+        const questions = await fetchQuizQuestions(category, difficulty);
+        
+        if (questions.length > 0) {
+            quizManager.loadQuestions(questions);
+        } else {
+            questionsContainer.innerHTML = '<p class="error">Failed to load questions. Please try again.</p>';
+        }
+    });
+});
