@@ -581,7 +581,7 @@
 
   .quiz-header p {
     max-width: 900px;
-    margin:0 auto 25px auto;
+    margin:0 auto 15px auto;
     text-align: center;
   }
 
@@ -591,9 +591,11 @@
     gap: 10px;
     margin-bottom:50px;
   }
+
   #difficulty-select{
     font-size: 1.1em;
     padding: 7px 20px;
+    border-radius: 5px;
   }
   #start-quiz{
     padding: 10px 20px;
@@ -608,6 +610,10 @@
   .quiz-controls img {
     width:700px;
     margin-top: 25px;
+  }
+  .quiz-controls p{
+    font-size: 1.08em;
+    text-align: center;
   }
 
   .question-container {
