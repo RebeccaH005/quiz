@@ -301,4 +301,19 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
       
       resultsContainer.appendChild(resultsList); // Finally, add the results list to the results container
       
-      
+     // Add restart button
+     const restartButton = document.createElement('button');// Create a new <button> element
+     restartButton.className = 'restart-button'; // Assign a CSS class to the button for styling
+     restartButton.textContent = 'Take Another Quiz'; // Set the text displayed on the button
+     // Add a click event listener to the button that reloads the page when clicked
+     restartButton.addEventListener('click', () => {
+       // Reload the page or reset the quiz state
+       location.reload();
+     });
+     
+     resultsContainer.appendChild(restartButton); // Add the restart button to the results container so it's visible on the page
+     
+     // Add the results to the page
+     this.questionsContainer.appendChild(resultsContainer);
+   }
+ } 
