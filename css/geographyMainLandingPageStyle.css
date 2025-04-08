@@ -12,34 +12,44 @@ body{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position: relative; 
+    position:fixed;
     width: 100vw;
     height: 100vh;
 }
 
+/* .globeImage{
+  position: absolute;
+  z-index: -1;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; 
+  width: 50vw;
+  height: 50vh;
+  flex: auto;
+} */
+
 
 .textIntroPageContainer {
-
-    color: rgb(231, 235, 225);
+    color: rgb(255, 255, 255);
     background: rgba(4, 8, 10, 0.3);
     position: absolute; 
-    top: 37%; 
+    top: 42%; 
     left: 50%;
     transform: translate(-50%, -50%); 
-    border-radius: 14px;
-    width: 90%; 
+    border-radius: 12px;
+    width: 50%; 
     max-width: 600px;  
     text-align: center;
     display: flex;
     flex-direction: column; 
     align-items: center; 
-    padding: 50px 20px;
+    padding: 20px 10px;
 
 }
 
 
 h1{
-    font-size: 64px;
+    font-size: 41px;
     font-weight: bold;
     color: rgb(231, 235, 225);
     margin: 2px;
