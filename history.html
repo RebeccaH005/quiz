@@ -41,17 +41,14 @@
         </header>
 
         <div class="quiz-container content">
-            <div class="quiz-header" id="start_quiz" style="display:block; width: 100%; height: 100%;
-                        background-image: url('img/history.jpg')">
-                <div style="padding:15px">
-                    <div style="background-color: #00000080; border-radius: 10px; padding: 25px; color: white;
-                                margin:100px">
+            <div class="quiz-header background-image" id="start_quiz" 
+                    style="background-image:url('img/history.jpg')">
+                    <div class="title-box">
                         <h1>History Quiz</h1>
                         <h4>Start our History quiz, testing yourself on some British History.</h4>
                         <br>
                         <button class="btn-next" onclick="start_quiz()">Start Quiz</button>
                     </div>
-                </div>
             </div>
             
             <!-- Progress indicators will appear here -->
@@ -59,52 +56,69 @@
             
             <!-- Questions will appear here -->
             <div id="questions-container" class="questions-container">
-                <div id="question1-slide" class="page">
-                    <h1>Question 1</h1>
-                    <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
-                    <button class="btn-next" onclick="question_wrong(1)">Stirling</button>
-                    <button class="btn-next" onclick="question_wrong(1)">Dunfermline</button>
-                    <button class="btn-next" onclick="question_right(1)">Perth</button>
-
+                <div id="question1-slide" class="page background-image"
+                        style="background-image:url('img/james-I.jpg')">
+                    <div class="title-box">
+                        <h1>Question 1</h1>
+                        <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
+                        <button class="btn-next" onclick="question_wrong(1)">Stirling</button>
+                        <button class="btn-next" onclick="question_wrong(1)">Dunfermline</button>
+                        <button class="btn-next" onclick="question_right(1)">Perth</button>
+                    </div>
                 </div>
                 
-                <div id="question2-slide" class="page">
-                    <h1>Question 2</h1>
-                    <h2 id="question2">When did Highlanders start wearing the kilt?</h2>
-                    <button class="btn-next" onclick="question_right(2)">The 16th century</button>
-                    <button class="btn-next" onclick="question_wrong(2)">Medieval Era</button>
-                    <button class="btn-next" onclick="question_wrong(2)">Victorian Times</button>
+                <div id="question2-slide" class="page background-image"
+                            style="background-image:url('img/kilts.jpeg')">
+                    <div class="title-box">
+                        <h1>Question 2</h1>
+                        <h2 id="question2">When did Highlanders start wearing the kilt?</h2>
+                        <button class="btn-next" onclick="question_right(2)">The 16th century</button>
+                        <button class="btn-next" onclick="question_wrong(2)">Medieval Era</button>
+                        <button class="btn-next" onclick="question_wrong(2)">Victorian Times</button>
+                    </div>
                 </div>
                 
-                <div id="question3-slide" class="page">
-                    <h1>Question 3</h1>
-                    <h2 id="question3">How long was Queen Victoria’s reign?</h2>
-                    <button class="btn-next" onclick="question_right(3)">63</button>
-                    <button class="btn-next" onclick="question_wrong(3)">64</button>
-                    <button class="btn-next" onclick="question_wrong(3)">70</button>
+                <div id="question3-slide" class="page background-image"
+                        style="background-image:url('img/queen-victoria.jpg')">
+                    <div class="title-box">
+                        <h1>Question 3</h1>
+                        <h2 id="question3">How long was Queen Victoria’s reign?</h2>
+                        <button class="btn-next" onclick="question_right(3)">63</button>
+                        <button class="btn-next" onclick="question_wrong(3)">64</button>
+                        <button class="btn-next" onclick="question_wrong(3)">70</button>
+                    </div>
                 </div>
                 
-                <div id="question4-slide" class="page">
-                    <h1>Question 4</h1>
-                    <h2 id="question4">How many years did the Hundred Years’ War last?</h2>
-                    <button class="btn-next" onclick="question_wrong(4)">100 Years</button>
-                    <button class="btn-next" onclick="question_right(4)">116 Years</button>
-                    <button class="btn-next" onclick="question_wrong(4)">120 Years</button>
+                <div id="question4-slide" class="page background-image"
+                        style="background-image:url('img/100-years-war.jpeg')">
+                    <div class="title-box">
+                        <h1>Question 4</h1>
+                        <h2 id="question4">How many years did the Hundred Years’ War last?</h2>
+                        <button class="btn-next" onclick="question_wrong(4)">100 Years</button>
+                        <button class="btn-next" onclick="question_right(4)">116 Years</button>
+                        <button class="btn-next" onclick="question_wrong(4)">120 Years</button>
+                    </div>
                 </div>
                 
-                <div id="question5-slide" class="page">
-                    <h1>Question 5</h1>
-                    <h2 id="question5">True or false: Macbeth was a real Scottish king?</h2>
-                    <button class="btn-next" onclick="question_wrong(5)">False</button>
-                    <button class="btn-next" onclick="question_right(5)">True</button>
+                <div id="question5-slide" class="page background-image"
+                        style="background-image:url('img/macbeth.jpg')">
+                    <div class="title-box">
+                        <h1>Question 5</h1>
+                        <h2 id="question5">True or false: Macbeth was a real Scottish king?</h2>
+                        <button class="btn-next" onclick="question_wrong(5)">False</button>
+                        <button class="btn-next" onclick="question_right(5)">True</button>
+                    </div>
                 </div>
                 
-                <div id="question6-slide" class="page">
-                    <h1>Bonus Question</h1>
-                    <h2 id="question6">Which country did Mary Queen of Scots grow up in?</h2>
-                    <button class="btn-next" onclick="question_wrong(6)">England</button>
-                    <button class="btn-next" onclick="question_wrong(6)">Scotland</button>
-                    <button class="btn-next" onclick="bonus_right(6)">France</button>
+                <div id="question6-slide" class="page background-image"
+                        style="background-image:url('img/mary-queen-of-scots.jpg')">
+                    <div class="title-box">
+                        <h1>Bonus Question</h1>
+                        <h2 id="question6">Which country did Mary Queen of Scots grow up in?</h2>
+                        <button class="btn-next" onclick="question_wrong(6)">England</button>
+                        <button class="btn-next" onclick="question_wrong(6)">Scotland</button>
+                        <button class="btn-next" onclick="bonus_right(6)">France</button>
+                    </div>
                 </div>
 
                 <script src="js/history.js"></script>
@@ -294,11 +308,16 @@
                 </div>
                
 
-                <div id="final_score" class="page" style="background-image: url('img/congratulations.jpeg')">
-                    <h1 style="font-size:60px">Your Score: <span id="result"></span>/5</h1>
-                    <br>
-                    <h1 style="font-size:60px">Bonus Score: <span id="bonus_result"></span>/1</h1>
-                    <br>
+                <div id="final_score" class="page background-image"
+                        style="background-image:url('img/congratulations.jpeg')">
+                    <div class="padding-all">
+                        <div class="end-title-box">
+                            <h1 style="font-size:60px">Your Score: <span id="result"></span>/5</h1>
+                            <br>
+                            <h1 style="font-size:60px">Bonus Score: <span id="bonus_result"></span>/1</h1>
+                        </div>
+                    </div>
+                    <br>&nbsp;<br>
                     <a class="btn-next" href="index.html">Home</a>
                 </div>
 

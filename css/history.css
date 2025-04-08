@@ -26,3 +26,24 @@
     border-radius: 10px;
 }
 
+.background-image {
+    padding: 15px;
+    background-size: 100% auto;
+}
+
+.title-box {
+    background-color: #000000bb; 
+    border-radius: 10px; 
+    padding: 25px; 
+    color: white;
+    margin: 100px
+}
+
+.end-title-box {
+    background-color: none; 
+    border-radius: 10px; 
+    padding: 25px; 
+    color: white;
+    margin: 100px
+}
+
