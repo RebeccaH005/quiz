@@ -317,3 +317,71 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
      this.questionsContainer.appendChild(resultsContainer);
    }
  } 
+ // Helper functions to decode HTML
+ function decodeHTMLEntities(text) {
+    const textArea = document.createElement('textarea'); // Creates a text area element
+    textArea.innerHTML = text;  // Sets innerHTML to the encoded text
+    return textArea.value; // Return the decoded value
+  }
+  // Helper function to shuffle elements in an array 
+  function shuffleArray(array) {
+    // Loops through the array from the last element to the second element
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Pick a random index
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  
+  // Initialize the quiz (handles the start button click)
+  document.addEventListener('DOMContentLoaded', () => {
+    const questionsContainer = document.getElementById('questions-container'); // Container for the questions
+    const navigationContainer = document.getElementById('navigation-container'); // Container for the navigation (next, previous)
+    const progressContainer = document.getElementById('progress-container'); // Container for the progress bar
+    const startButton = document.getElementById('start-quiz'); // Start button element
+  
+    // Creates a QuizManager instance to manage quiz operations
+    const quizManager = new QuizManager(
+      questionsContainer,
+      navigationContainer, 
+      progressContainer
+    );
+    
+    // Adds an event listener for when the start button is clicked
+    startButton.addEventListener('click', async () => {
+      // Get the selected category and difficulty from the dropdown menus
+      const category = document.getElementById('category-select').value;
+      const difficulty = document.getElementById('difficulty-select').value;
+      
+      // Show loading state 
+      questionsContainer.innerHTML = '<p class="loading">Loading questions...</p>';
+      navigationContainer.innerHTML = ''; // Clears any previous navigation
+      progressContainer.innerHTML = ''; // Clear any previous progress
+      
+      // Hide quiz controls
+      document.querySelector('.quiz-controls').style.display = 'none';
+      
+      // Fetch and display questions based on the selected category and difficulty
+      const questions = await fetchQuizQuestions(category, difficulty);
+      
+      // Checks if questions were successfully loaded
+      if (questions.length > 0) {
+        // Loads the questions into the quiz manager
+        quizManager.loadQuestions(questions);
+      } else {
+         // If no questions were found, display an error message
+        questionsContainer.innerHTML = '<p class="error">Failed to load questions. Please try again.</p>';
+        
+        // Show retry button
+        const retryButton = document.createElement('button');
+        retryButton.textContent = 'Try Again';
+        retryButton.addEventListener('click', () => {
+          // Show quiz controls again
+          document.querySelector('.quiz-controls').style.display = 'flex';
+          questionsContainer.innerHTML = '';
+        });
+        
+        navigationContainer.appendChild(retryButton);
+      }
+    });
+  });
+  
