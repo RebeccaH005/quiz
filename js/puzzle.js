@@ -42,7 +42,7 @@ const letterSets = [
     }
   ];
 
-// Initialising game state variables
+// Game state variables
 let currentSetIndex;
 let gameLetters = [];
 let currentLetters = [];
@@ -53,16 +53,16 @@ let foundWords = [];
 let possibleWords = [];
 let originalLetters = []; // Store the original set of letters
 let letterPositions = []; // Store the positions of letters in the UI
-let gameActive = false; // Track if the game is active
+let gameStarted = false; // Track if game has started
 
-// Assigning variable names to DOM elements
+// DOM elements
 const letterContainer = document.getElementById('letter-container');
 const wordContainer = document.getElementById('word-container');
 const submitButton = document.getElementById('submit');
 const shuffleButton = document.getElementById('shuffle');
 const clearButton = document.getElementById('clear');
 const newGameButton = document.getElementById('new-game');
-const startGameButton = document.getElementById('start-game');
+const startButton = document.getElementById('start-button');
 const scoreElement = document.getElementById('score');
 const timerElement = document.getElementById('timer');
 const threeLetterWordsList = document.getElementById('three-letter-words');
@@ -70,372 +70,380 @@ const fourLetterWordsList = document.getElementById('four-letter-words');
 const fiveLetterWordsList = document.getElementById('five-letter-words');
 const sixLetterWordsList = document.getElementById('six-letter-words');
 const gameOverModal = document.getElementById('game-over-modal');
-const startGameModal = document.getElementById('start-game-modal');
 const finalScoreElement = document.getElementById('final-score');
 const wordsFoundElement = document.getElementById('words-found');
 const totalWordsElement = document.getElementById('total-words');
 const playAgainButton = document.getElementById('play-again');
 const messageElement = document.getElementById('message');
-const gameControlsContainer = document.getElementById('game-controls');
 
-// Select letter set at random
-function selectRandomLetterSet() {
-    currentSetIndex = Math.floor(Math.random() * letterSets.length);
-    return letterSets[currentSetIndex].letters.split('');
-}
-  
-// Shuffle letters using the Fisher-Yates algorithm
-function shuffleArray(array) {
-    const newArray = [...array];
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-    return newArray;
-}
-
-// Rendering letters in the UI
-function updateLetters() {
-    // Clear the letter container
-    letterContainer.innerHTML = '';
-    
-    // Reset letter positions
-    letterPositions = [];
-    
-    // Add current letters
-    gameLetters.forEach((letter, index) => {
-      const letterElement = document.createElement('span');
-      letterElement.textContent = letter;
-      letterElement.style.margin = '0 5px';
-      letterElement.style.padding = '5px 10px';
-      letterElement.style.border = '1px solid black';
-      letterElement.style.cursor = 'pointer';
-      letterElement.setAttribute('data-index', index);
-      
-      letterElement.addEventListener('click', handleLetterClick);
-      
-      letterContainer.appendChild(letterElement);
-      
-      // Track the position of each letter
-      letterPositions.push({
-        letter: letter,
-        element: letterElement
-      });
-    });
-}
-  
-function updateWordContainer() {
-    // Clear the word container
-    wordContainer.innerHTML = '';
-    
-    // Add current word letters
-    currentLetters.forEach((letter, index) => {
-      const letterElement = document.createElement('span');
-      letterElement.textContent = letter.letter;
-      letterElement.style.margin = '0 5px';
-      letterElement.style.padding = '5px 10px';
-      letterElement.style.border = '1px solid black';
-      letterElement.style.cursor = 'pointer';
-      
-      letterElement.addEventListener('click', () => {
-        // Return the letter to the original container
-        returnLetterToOriginalContainer(index);
-      });
-      
-      wordContainer.appendChild(letterElement);
-    });
-}
-  
-function returnLetterToOriginalContainer(index) {
-    const letterObj = currentLetters[index];
-    
-    // Add the letter back to the game letters
-    gameLetters.push(letterObj.letter);
-    
-    // Remove from current letters
-    currentLetters.splice(index, 1);
-    
-    // Update UI
-    updateLetters();
-    updateWordContainer();
-}
-  
-function getCurrentWord() {
-    return currentLetters.map(letterObj => letterObj.letter).join('');
-}
-  
-function isValidWord(word) {
-    return letterSets[currentSetIndex].words.includes(word.toLowerCase());
-}
-  
-function updateScore(word) {
-    // Award points based on word length
-    const wordLength = word.length;
-    let points = 0;
-    
-    switch (wordLength) {
-      case 3:
-        points = 100;
-        break;
-      case 4:
-        points = 200;
-        break;
-      case 5:
-        points = 400;
-        break;
-      case 6:
-        points = 800;
-        break;
-    }
-    
-    score += points;
-    scoreElement.textContent = score;
-}
-  
-function addWordToResults(word) {
-    const wordLength = word.length;
-    const listItem = document.createElement('li');
-    listItem.textContent = word;
-    listItem.style.color = 'green';
-    
-    switch (wordLength) {
-      case 3:
-        threeLetterWordsList.appendChild(listItem);
-        break;
-      case 4:
-        fourLetterWordsList.appendChild(listItem);
-        break;
-      case 5:
-        fiveLetterWordsList.appendChild(listItem);
-        break;
-      case 6:
-        sixLetterWordsList.appendChild(listItem);
-        break;
-    }
-}
-  
-function showMessage(text, type) {
-    // Set message text
-    messageElement.textContent = text;
-    
-    // Set appropriate class
-    messageElement.className = 'message';
-    messageElement.classList.add(type);
-    
-    // Show message
-    messageElement.style.display = 'block';
-    
-    // Hide message after 3 seconds
-    setTimeout(() => {
-      messageElement.style.display = 'none';
-    }, 3000);
-}
-  
-function startTimer() {
-    timerInterval = setInterval(() => {
-      timer--;
-      timerElement.textContent = timer;
-      
-      if (timer <= 0) {
-        endGame();
-      }
-    }, 1000);
-}
-  
-function endGame() {
-    clearInterval(timerInterval);
-    gameActive = false;
-    finalScoreElement.textContent = score;
-    wordsFoundElement.textContent = foundWords.length;
-    totalWordsElement.textContent = letterSets[currentSetIndex].words.length;
-    gameOverModal.style.display = 'block';
-    
-    // Disable game controls
-    toggleGameControls(false);
-}
-  
-function resetGame() {
-    // Reset game state
-    originalLetters = selectRandomLetterSet();
-    gameLetters = [...originalLetters];
-    currentLetters = [];
-    foundWords = [];
-    score = 0;
-    timer = 120;
-    gameActive = true;
-    
-    // Update UI
-    scoreElement.textContent = score;
-    timerElement.textContent = timer;
-    threeLetterWordsList.innerHTML = '';
-    fourLetterWordsList.innerHTML = '';
-    fiveLetterWordsList.innerHTML = '';
-    sixLetterWordsList.innerHTML = '';
-    gameOverModal.style.display = 'none';
-    startGameModal.style.display = 'none';
-    messageElement.style.display = 'none';
-    
-    // Update letters
-    updateLetters();
-    updateWordContainer();
-    
-    // Enable game controls
-    toggleGameControls(true);
-    
-    // Start timer
-    clearInterval(timerInterval);
-    startTimer();
-}
-  
-function prepareGame() {
-    // Initialize UI without starting the game
-    originalLetters = selectRandomLetterSet();
-    gameLetters = [...originalLetters];
-    currentLetters = [];
-    
-    // Display start game modal
-    startGameModal.style.display = 'block';
-    
-    // Disable game controls until game starts
-    toggleGameControls(false);
-    
-    // Update initial UI
-    updateLetters();
-    updateWordContainer();
-    
-    // Set initial values
-    scoreElement.textContent = '0';
-    timerElement.textContent = '120';
-}
-  
+// Helper functions
 function toggleGameControls(enabled) {
-    // Enable/disable game buttons based on game state
-    submitButton.disabled = !enabled;
-    shuffleButton.disabled = !enabled;
-    clearButton.disabled = !enabled;
-    newGameButton.disabled = !enabled;
-    
-    // Optionally change styling to indicate disabled state
-    if (enabled) {
-      gameControlsContainer.classList.remove('disabled');
-    } else {
-      gameControlsContainer.classList.add('disabled');
+  // Disable/enable game controls based on whether the game has started
+  const buttons = [submitButton, shuffleButton, clearButton, newGameButton];
+  buttons.forEach(button => {
+    if (button) {
+      button.disabled = !enabled;
     }
+  });
+
+  // Also update the letter container to indicate if letters are clickable
+  if (letterContainer) {
+    letterContainer.style.opacity = enabled ? '1' : '0.7';
+  }
 }
+
+function selectRandomLetterSet() {
+  currentSetIndex = Math.floor(Math.random() * letterSets.length);
+  return letterSets[currentSetIndex].letters.split('');
+}
+
+function shuffleArray(array) {
+  const newArray = [...array];
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+}
+
+function updateLetters() {
+  // Clear the letter container
+  letterContainer.innerHTML = '';
   
+  // Reset letter positions
+  letterPositions = [];
+  
+  // Add current letters
+  gameLetters.forEach((letter, index) => {
+    const letterElement = document.createElement('span');
+    letterElement.textContent = letter;
+    letterElement.setAttribute('data-index', index);
+    
+    if (gameStarted) {
+      letterElement.addEventListener('click', handleLetterClick);
+    }
+    
+    letterContainer.appendChild(letterElement);
+    
+    // Track the position of each letter
+    letterPositions.push({
+      letter: letter,
+      element: letterElement
+    });
+  });
+}
+
+function updateWordContainer() {
+  // Clear the word container
+  wordContainer.innerHTML = '';
+  
+  // Add current word letters
+  currentLetters.forEach((letter, index) => {
+    const letterElement = document.createElement('span');
+    letterElement.textContent = letter.letter;
+    
+    letterElement.addEventListener('click', () => {
+      // Return the letter to the original container
+      returnLetterToOriginalContainer(index);
+    });
+    
+    wordContainer.appendChild(letterElement);
+  });
+}
+
+function returnLetterToOriginalContainer(index) {
+  const letterObj = currentLetters[index];
+  
+  // Add the letter back to the game letters
+  gameLetters.push(letterObj.letter);
+  
+  // Remove from current letters
+  currentLetters.splice(index, 1);
+  
+  // Update UI
+  updateLetters();
+  updateWordContainer();
+}
+
+function getCurrentWord() {
+  return currentLetters.map(letterObj => letterObj.letter).join('');
+}
+
+function isValidWord(word) {
+  return letterSets[currentSetIndex].words.includes(word.toLowerCase());
+}
+
+function updateScore(word) {
+  // Award points based on word length
+  const wordLength = word.length;
+  let points = 0;
+  
+  switch (wordLength) {
+    case 3:
+      points = 100;
+      break;
+    case 4:
+      points = 200;
+      break;
+    case 5:
+      points = 400;
+      break;
+    case 6:
+      points = 800;
+      break;
+  }
+  
+  score += points;
+  scoreElement.textContent = score;
+}
+
+function addWordToResults(word) {
+  const wordLength = word.length;
+  const listItem = document.createElement('li');
+  listItem.textContent = word;
+  
+  switch (wordLength) {
+    case 3:
+      threeLetterWordsList.appendChild(listItem);
+      break;
+    case 4:
+      fourLetterWordsList.appendChild(listItem);
+      break;
+    case 5:
+      fiveLetterWordsList.appendChild(listItem);
+      break;
+    case 6:
+      sixLetterWordsList.appendChild(listItem);
+      break;
+  }
+}
+
+function showMessage(text, type) {
+  // Set message text
+  messageElement.textContent = text;
+  
+  // Set appropriate class
+  messageElement.className = 'message';
+  messageElement.classList.add(type);
+  
+  // Show message
+  messageElement.style.display = 'block';
+  
+  // Hide message after 3 seconds
+  setTimeout(() => {
+    messageElement.style.display = 'none';
+  }, 3000);
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timer--;
+    timerElement.textContent = timer;
+    
+    if (timer <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+
+function endGame() {
+  clearInterval(timerInterval);
+  gameStarted = false;
+  
+  // Update game over modal
+  finalScoreElement.textContent = score;
+  wordsFoundElement.textContent = foundWords.length;
+  totalWordsElement.textContent = letterSets[currentSetIndex].words.length;
+  gameOverModal.style.display = 'block';
+  
+  // Show start button again and hide instructions
+  startButton.textContent = 'Play Again';
+  
+  // Disable game controls
+  toggleGameControls(false);
+}
+
+function prepareGame() {
+  // Set up the game but don't start timer
+  originalLetters = selectRandomLetterSet();
+  gameLetters = [...originalLetters];
+  currentLetters = [];
+  foundWords = [];
+  score = 0;
+  timer = 120;
+  
+  // Update UI
+  scoreElement.textContent = score;
+  timerElement.textContent = timer;
+  threeLetterWordsList.innerHTML = '';
+  fourLetterWordsList.innerHTML = '';
+  fiveLetterWordsList.innerHTML = '';
+  sixLetterWordsList.innerHTML = '';
+  gameOverModal.style.display = 'none';
+  messageElement.style.display = 'none';
+  
+  // Update letters
+  updateLetters();
+  updateWordContainer();
+  
+  // Ensure game controls are disabled
+  toggleGameControls(false);
+}
+
+function startGame() {
+  // Change start button to show "Reset Game" and update its behavior
+  startButton.textContent = 'Reset Game';
+  
+  // Start or restart the game
+  gameStarted = true;
+  
+  // Reset the game state
+  prepareGame();
+  
+  // Enable all controls
+  toggleGameControls(true);
+  
+  // Start the timer
+  clearInterval(timerInterval); // Clear any existing timer
+  startTimer();
+  
+  // Update letter elements to be clickable
+  updateLetters();
+  
+  // Show a welcome message
+  showMessage('Game started! Find words using the given letters.', 'success');
+}
+
 // Event handlers
 function handleLetterClick() {
-    if (!gameActive) return; // Ignore clicks if game is not active
-    
-    const index = parseInt(this.getAttribute('data-index'));
-    const letter = gameLetters[index];
-    
-    // Add letter to current word
-    currentLetters.push({
-      letter: letter,
-      originalIndex: index
-    });
-    
-    // Remove letter from game letters
-    gameLetters.splice(index, 1);
-    
-    // Update UI
-    updateLetters();
-    updateWordContainer();
-}
+  if (!gameStarted) return;
   
+  const index = parseInt(this.getAttribute('data-index'));
+  const letter = gameLetters[index];
+  
+  // Add letter to current word
+  currentLetters.push({
+    letter: letter,
+    originalIndex: index
+  });
+  
+  // Remove letter from game letters
+  gameLetters.splice(index, 1);
+  
+  // Update UI
+  updateLetters();
+  updateWordContainer();
+}
+
 // Button event listeners
 submitButton.addEventListener('click', () => {
-    if (!gameActive) return; // Ignore if game is not active
-    
-    const word = getCurrentWord();
-    
-    if (word.length < 3) {
-      showMessage('Word must be at least 3 letters long!', 'warning');
-      return;
-    }
-    
-    if (foundWords.includes(word.toLowerCase())) {
-      showMessage('You already found this word!', 'warning');
-      return;
-    }
-    
-    if (isValidWord(word)) {
-      // Add word to found words
-      foundWords.push(word.toLowerCase());
-      
-      // Update score
-      updateScore(word);
-      
-      // Add word to results
-      addWordToResults(word);
-      
-      // Show success message
-      showMessage(`Great! "${word}" found (+${word.length >= 6 ? 800 : word.length >= 5 ? 400 : word.length >= 4 ? 200 : 100} points)`, 'success');
-      
-      // Return letters to the letter container
-      currentLetters.forEach(letterObj => {
-        gameLetters.push(letterObj.letter);
-      });
-      
-      // Clear current word
-      currentLetters = [];
-      
-      // Update UI
-      updateLetters();
-      updateWordContainer();
-    } else {
-      showMessage(`"${word}" is not a valid word!`, 'error');
-      
-      // Return letters to the letter container
-      currentLetters.forEach(letterObj => {
-        gameLetters.push(letterObj.letter);
-      });
-      
-      // Clear current word
-      currentLetters = [];
-      
-      // Update UI
-      updateLetters();
-      updateWordContainer();
-    }
-});
+  if (!gameStarted) return;
   
-shuffleButton.addEventListener('click', () => {
-    if (!gameActive) return; // Ignore if game is not active
-    
-    gameLetters = shuffleArray(gameLetters);
-    updateLetters();
-    showMessage('Letters shuffled!', 'success');
-});
+  const word = getCurrentWord();
   
-clearButton.addEventListener('click', () => {
-    if (!gameActive) return; // Ignore if game is not active
+  if (word.length < 3) {
+    showMessage('Word must be at least 3 letters long!', 'warning');
+    return;
+  }
+  
+  if (foundWords.includes(word.toLowerCase())) {
+    showMessage('You already found this word!', 'warning');
+    return;
+  }
+  
+  if (isValidWord(word)) {
+    // Add word to found words
+    foundWords.push(word.toLowerCase());
     
-    // Return all letters to the original container
+    // Update score
+    updateScore(word);
+    
+    // Add word to results
+    addWordToResults(word);
+    
+    // Show success message
+    showMessage(`Great! "${word}" found (+${word.length >= 6 ? 800 : word.length >= 5 ? 400 : word.length >= 4 ? 200 : 100} points)`, 'success');
+    
+    // Return letters to the letter container
     currentLetters.forEach(letterObj => {
       gameLetters.push(letterObj.letter);
     });
     
+    // Clear current word
     currentLetters = [];
     
     // Update UI
     updateLetters();
     updateWordContainer();
-    showMessage('Word cleared!', 'warning');
+  } else {
+    showMessage(`"${word}" is not a valid word!`, 'error');
+    
+    // Return letters to the letter container
+    currentLetters.forEach(letterObj => {
+      gameLetters.push(letterObj.letter);
+    });
+    
+    // Clear current word
+    currentLetters = [];
+    
+    // Update UI
+    updateLetters();
+    updateWordContainer();
+  }
 });
+
+shuffleButton.addEventListener('click', () => {
+  if (!gameStarted) return;
   
+  gameLetters = shuffleArray(gameLetters);
+  updateLetters();
+  showMessage('Letters shuffled!', 'success');
+});
+
+clearButton.addEventListener('click', () => {
+  if (!gameStarted) return;
+  
+  // Return all letters to the original container
+  currentLetters.forEach(letterObj => {
+    gameLetters.push(letterObj.letter);
+  });
+  
+  currentLetters = [];
+  
+  // Update UI
+  updateLetters();
+  updateWordContainer();
+  showMessage('Word cleared!', 'warning');
+});
+
 newGameButton.addEventListener('click', () => {
-    // Show start game modal instead of immediately starting a new game
-    startGameModal.style.display = 'block';
+  if (!gameStarted) {
+    startGame(); // Start if not started
+  } else {
+    // Reset game without showing dialog
+    prepareGame();
+    startTimer();
+  }
 });
-  
-startGameButton.addEventListener('click', resetGame);
+
 playAgainButton.addEventListener('click', () => {
-    // Show start game modal instead of immediately starting a new game
-    startGameModal.style.display = 'block';
-    gameOverModal.style.display = 'none';
+  gameOverModal.style.display = 'none';
+  startGame();
 });
-  
-// Initialize page with game ready to start
-window.addEventListener('load', prepareGame);
+
+// Start button event listener
+startButton.addEventListener('click', () => {
+  if (!gameStarted) {
+    startGame();
+  } else {
+    // If the game is already started, this acts as a reset button
+    clearInterval(timerInterval);
+    startGame();
+  }
+});
+
+// Initialize the game
+document.addEventListener('DOMContentLoaded', () => {
+  // Prepare the game but don't start the timer
+  prepareGame();
+});

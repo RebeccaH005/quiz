@@ -40,63 +40,69 @@
 
         <section class="quiz-container content">
 
-            <h1>Word Puzzle</h1>
-            <div id="start-game-modal" class="modal-overlay">
-                <div class="modal-content">
-                    <p>Click on available letters to move them to the letter box. If you move a letter into the box by mistake, click on it to remove it.</p>
-                    <p>Find as many words as you can in 120 seconds!</p>
-                    <button id="start-game">Start Game</button>
+            <h1 class="word-puzzle-heading">Word Puzzle</h1>
+            <div id="instructions" class="instructions">
+                <p><strong>Instructions:</strong> Find words using the given letters. If you miss-click a letter and move it to the word box, you can click on it again to return it to the list. Words must be at least 3 letters long.</p>
+                <p><strong>Points:</strong> 
+                    3-letter words: 100 points | 
+                    4-letter words: 200 points | 
+                    5-letter words: 400 points | 
+                    6-letter words: 800 points
+                </p>
+                <p>Click <strong>Start Game</strong> button when you're ready to begin. You'll have 2 minutes to find as many words as possible!</p>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat-container">
+                    <span class="stat-label">Score:</span>
+                    <span id="score" class="stat-value">0</span>
+                </div>
+                <div class="stat-container">
+                    <span class="stat-label">Time Left:</span>
+                    <span id="timer" class="stat-value">120</span>
+                </div>
+            </div>
+                
+            <div class="game-area">
+                <div id="letter-container" class="letter-container"></div>
+                <div id="word-container" class="word-container"></div>
+            </div>
+                
+            <div id="message" class="message"></div>
+                
+            <div class="controls">
+                <button id="start-button" class="btn primary-btn">Start Game</button>
+                <button id="submit" class="btn action-btn" disabled>Submit Word</button>
+                <button id="shuffle" class="btn action-btn" disabled>Shuffle</button>
+                <button id="clear" class="btn action-btn" disabled>Clear</button>
+                <button id="new-game" class="btn action-btn" disabled>New Game</button>
+            </div>
+                
+            <div class="results-container">
+                <div class="results-column">
+                    <h3>3-Letter Words</h3>
+                    <ul id="three-letter-words" class="words-list"></ul>
+                </div>
+                <div class="results-column">
+                    <h3>4-Letter Words</h3>
+                    <ul id="four-letter-words" class="words-list"></ul>
+                </div>
+                <div class="results-column">
+                    <h3>5-Letter Words</h3>
+                    <ul id="five-letter-words" class="words-list"></ul>
+                </div>
+                <div class="results-column">
+                    <h3>6-Letter Words</h3>
+                    <ul id="six-letter-words" class="words-list"></ul>
                 </div>
             </div>
 
-            <div>
-                <div>
-                    Score: <span id="score">0</span>
-                </div>
-                
-                <div>
-                    Time: <span id="timer">120</span>s
-                </div>
-                
-                <div id="message" class="message"></div>
-                
-                <div id="word-container"></div>
-                
-                <div id="letter-container"></div>
-                
-                <div id="game-controls" class="disabled">
-                    <button id="submit">Submit Word</button>
-                    <button id="shuffle">Shuffle</button>
-                    <button id="clear">Clear</button>
-                    <button id="new-game">New Game</button>
-                </div>
-                
-                <div class="completed-words">
-                    <div>
-                        <h3>3-Letter</h3>
-                        <ul id="three-letter-words"></ul>
-                    </div>
-                    <div>
-                        <h3>4-Letter</h3>
-                        <ul id="four-letter-words"></ul>
-                    </div>
-                    <div>
-                        <h3>5-Letter</h3>
-                        <ul id="five-letter-words"></ul>
-                    </div>
-                    <div>
-                        <h3>6-Letter</h3>
-                        <ul id="six-letter-words"></ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="game-over-modal" class="modal-overlay">
+            <div id="game-over-modal" class="modal">
                 <div class="modal-content">
                     <h2>Game Over!</h2>
                     <p>Your final score: <span id="final-score">0</span></p>
-                    <p>Words found: <span id="words-found">0</span> / <span id="total-words">0</span></p>
-                    <button id="play-again">Play Again</button>
+                    <p>Words found: <span id="words-found">0</span> out of <span id="total-words">0</span></p>
+                    <button id="play-again" class="btn primary-btn">Play Again</button>
                 </div>
             </div>
 
