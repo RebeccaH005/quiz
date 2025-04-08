@@ -59,10 +59,10 @@
             <div id="questions-container" class="questions-container">
                 <div id="question1-slide" style="display:none; text-align:center">
                     <h1>Question 1</h1>
-                    <h2 id="question1">Edinburgh is the capital of Scotland - but which of these cities used to be the capital?</h2>
-                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_wrong(1)">Dundee</button>
-                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_wrong(1)">Glasgow</button>
-                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_right(1)">Stirling</button>
+                    <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
+                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_wrong(1)">Stirling</button>
+                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_wrong(1)">Dunfermline</button>
+                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="question_right(1)">Perth</button>
 
                 </div>
                 
@@ -143,14 +143,16 @@
                     }
                 </script>
 
-                <div id="question1-wrong" style="display:none">
-                    Incorrect
-                    <button onclick="nextQuestion(2)">Next Question</button>
+                <div id="question1-wrong" style="display:none; background-color:tomato; text-align:center">
+                    <h1>Incorrect</h1>
+                    <br>
+                    <h4>Having ruled for nearly 31 years, James I was assassinated in Perth by his own uncle, Walter, Earl of Atholl. Following this, Edinburgh became the new capital of Scotland to the present day.</h4>
+                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="nextQuestion(2)">Next Question</button>
                 </div>
 
-                <div id="question1-right" style="display:none">
-                    Correct
-                    <button onclick="nextQuestion(2)">Next Question</button>
+                <div id="question1-right" style="display:none; background-color:tomato; text-align:center">
+                    <h1>Correct</h1>
+                    <button style="padding: 10px; border-radius:10px; background-color:cadetblue" onclick="nextQuestion(2)">Next Question</button>
                 </div>
 
                 <div id="question2-wrong" style="display:none">
