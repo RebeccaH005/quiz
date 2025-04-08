@@ -58,39 +58,45 @@
             <!-- Questions will appear here -->
             <div id="questions-container" class="questions-container">
                 <div id="question1-slide" style="display:none">
-                    <div id="question1">How many wives did Henry VIII have?</div>
-                    <button onclick="question_wrong(1)">5</button>
-                    <button onclick="question_wrong(1)">8</button>
-                    <button onclick="question_right(1)">6</button>
+                    <div id="question1">Edinburgh is the capital of Scotland - but which of these cities used to be the capital?</div>
+                    <button onclick="question_wrong(1)">Dundee</button>
+                    <button onclick="question_wrong(1)">Glasgow</button>
+                    <button onclick="question_right(1)">Stirling</button>
 
                 </div>
                 
                 <div id="question2-slide" style="display:none">
-                    <div id="question2">Who discovered penicillin?</div>
-                    <button onclick="question_right(2)">Alexander Flemming</button>
-                    <button onclick="question_wrong(2)">8</button>
-                    <button onclick="question_wrong(2)">6</button>
+                    <div id="question2">When did Highlanders start wearing the kilt?</div>
+                    <button onclick="question_right(2)">The 16th century</button>
+                    <button onclick="question_wrong(2)">Medieval Era</button>
+                    <button onclick="question_wrong(2)">Victorian Times</button>
                 </div>
                 
                 <div id="question3-slide" style="display:none">
-                    <div id="question3">How many wives did Henry VIII have?</div>
-                    <button onclick="question_wrong(3)">5</button>
-                    <button onclick="question_right(3)">8</button>
-                    <button onclick="question_wrong(3)">6</button>
+                    <div id="question3">How long was Queen Victoria’s reign?</div>
+                    <button onclick="question_right(3)">63</button>
+                    <button onclick="question_wrong(3)">64</button>
+                    <button onclick="question_wrong(3)">70</button>
                 </div>
                 
                 <div id="question4-slide" style="display:none">
-                    <div id="question4">How many wives did Henry VIII have?</div>
-                    <button onclick="question_right(4)">5</button>
-                    <button onclick="question_wrong(4)">8</button>
-                    <button onclick="question_wrong(4)">6</button>
+                    <div id="question4">How many years did the Hundred Years’ War last?</div>
+                    <button onclick="question_wrong(4)">100 Years</button>
+                    <button onclick="question_right(4)">116 Years</button>
+                    <button onclick="question_wrong(4)">120 Days</button>
                 </div>
                 
                 <div id="question5-slide" style="display:none">
-                    <div id="question5">How many wives did Henry VIII have?</div>
-                    <button onclick="question_wrong(5)">5</button>
-                    <button onclick="question_wrong(5)">8</button>
-                    <button onclick="question_right(5)">6</button>
+                    <div id="question5">True or false: Macbeth was a real Scottish king?</div>
+                    <button onclick="question_wrong(5)">False</button>
+                    <button onclick="question_right(5)">True</button>
+                </div>
+                
+                <div id="question6-slide" style="display:none">
+                    <div id="question6">Which country did Mary Queen of Scots grow up in?</div>
+                    <button onclick="question_wrong(6)">Spain</button>
+                    <button onclick="question_wrong(6)">Scotland</button>
+                    <button onclick="question_right(6)">France</button>
                 </div>
 
                 <script>
@@ -173,13 +179,24 @@
 
                 <div id="question5-wrong" style="display:none">
                     Incorrect
-                    <button onclick="finish()">Finish</button>
+                    <button onclick="nextQuestion(5)">Next Question</button>
                 </div>
 
                 <div id="question5-right" style="display:none">
                     Correct
+                    <button onclick="nextQuestion(5)">Next Question</button>
+                </div>
+
+                <div id="question6-wrong" style="display:none">
+                    Incorrect
                     <button onclick="finish()">Finish</button>
                 </div>
+
+                <div id="question6-right" style="display:none">
+                    Correct
+                    <button onclick="finish()">Finish</button>
+                </div>
+               
 
                 <div id="final_score" style="display:none">
                     Your Score: 
