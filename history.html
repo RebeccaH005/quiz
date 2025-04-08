@@ -41,11 +41,9 @@
         </header>
 
         <div class="quiz-container content">
-            <div class="quiz-header" id="start_quiz" style="display:block; width: 100%; height: 100%;
-                        background-image: url('img/history.jpg')">
-                <div style="padding:15px">
-                    <div style="background-color: #00000080; border-radius: 10px; padding: 25px; color: white;
-                                margin:100px">
+            <div class="quiz-header start-page-img background-image" id="start_quiz">
+                <div class="padding-all">
+                    <div class="title-box">
                         <h1>History Quiz</h1>
                         <h4>Start our History quiz, testing yourself on some British History.</h4>
                         <br>
@@ -59,21 +57,24 @@
             
             <!-- Questions will appear here -->
             <div id="questions-container" class="questions-container">
-                <div id="question1-slide" class="page">
-                    <h1>Question 1</h1>
-                    <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
-                    <button class="btn-next" onclick="question_wrong(1)">Stirling</button>
-                    <button class="btn-next" onclick="question_wrong(1)">Dunfermline</button>
-                    <button class="btn-next" onclick="question_right(1)">Perth</button>
-
+                <div id="question1-slide" class="page q1-page-img background-image">
+                    <div class="title-box">
+                        <h1>Question 1</h1>
+                        <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
+                        <button class="btn-next" onclick="question_wrong(1)">Stirling</button>
+                        <button class="btn-next" onclick="question_wrong(1)">Dunfermline</button>
+                        <button class="btn-next" onclick="question_right(1)">Perth</button>
+                    </div>
                 </div>
                 
-                <div id="question2-slide" class="page">
-                    <h1>Question 2</h1>
-                    <h2 id="question2">When did Highlanders start wearing the kilt?</h2>
-                    <button class="btn-next" onclick="question_right(2)">The 16th century</button>
-                    <button class="btn-next" onclick="question_wrong(2)">Medieval Era</button>
-                    <button class="btn-next" onclick="question_wrong(2)">Victorian Times</button>
+                <div id="question2-slide" class="page q2-page-img background-image">
+                    <div class="title-box">
+                        <h1>Question 2</h1>
+                        <h2 id="question2">When did Highlanders start wearing the kilt?</h2>
+                        <button class="btn-next" onclick="question_right(2)">The 16th century</button>
+                        <button class="btn-next" onclick="question_wrong(2)">Medieval Era</button>
+                        <button class="btn-next" onclick="question_wrong(2)">Victorian Times</button>
+                    </div>
                 </div>
                 
                 <div id="question3-slide" class="page">
@@ -294,11 +295,15 @@
                 </div>
                
 
-                <div id="final_score" class="page" style="background-image: url('img/congratulations.jpeg')">
-                    <h1 style="font-size:60px">Your Score: <span id="result"></span>/5</h1>
-                    <br>
-                    <h1 style="font-size:60px">Bonus Score: <span id="bonus_result"></span>/1</h1>
-                    <br>
+                <div id="final_score" class="page end-page-img background-image">
+                    <div class="padding-all">
+                        <div class="end-title-box">
+                            <h1 style="font-size:60px">Your Score: <span id="result"></span>/5</h1>
+                            <br>
+                            <h1 style="font-size:60px">Bonus Score: <span id="bonus_result"></span>/1</h1>
+                        </div>
+                    </div>
+                    <br>&nbsp;<br>
                     <a class="btn-next" href="index.html">Home</a>
                 </div>
 
