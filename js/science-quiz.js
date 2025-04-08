@@ -1,9 +1,8 @@
 // Function that fetches the quiz questions from provided API 
-
-async function fetchQuizQuestions(category, difficulty, amount = 10) {
+async function fetchQuizQuestions(difficulty, amount = 10) {
     try {
       // Using Open Trivia Database as an example API
-      const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+      const url = `https://opentdb.com/api.php?amount=${amount}&category=17&difficulty=${difficulty}&type=multiple`;
       const response = await fetch(url); // fetches data from the API
       const data = await response.json(); // converts the responses into JSON format
       
@@ -224,62 +223,70 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
        // Display results page
        this.renderResults(score, results);
     }
+    // Results logic
     renderResults(score, results) {
-      // Clear existing content
+      // Clears existing content from the page
       this.questionsContainer.innerHTML = '';
       this.navigationContainer.innerHTML = '';
       this.progressContainer.innerHTML = '';
       
-      // Create results container
+      // Creates results container
       const resultsContainer = document.createElement('div');
       resultsContainer.className = 'results-container';
       
-      // Add score header
+      // Adds score as header
       const scoreHeader = document.createElement('h2');
       scoreHeader.className = 'score-header';
       scoreHeader.textContent = `Your Score: ${score} out of ${this.questions.length}`;
       resultsContainer.appendChild(scoreHeader);
       
-      // Add percentage
+      // Adds percentage score
       const percentage = document.createElement('div');
       percentage.className = 'score-percentage';
       const percentValue = Math.round((score / this.questions.length) * 100);
       percentage.textContent = `${percentValue}%`;
       resultsContainer.appendChild(percentage);
       
-      // Add results list
+      // Adds results list for each question
       const resultsList = document.createElement('div');
       resultsList.className = 'results-list';
       
+      // Gos through each question's result
       results.forEach((result, index) => {
-        const resultItem = document.createElement('div');
+        const resultItem = document.createElement('div');  // Each result item will show if it was right or wrong
         resultItem.className = `result-item ${result.isCorrect ? 'correct' : 'incorrect'}`;
         
+        // Shows question number
         const questionNumber = document.createElement('div');
         questionNumber.className = 'question-number';
         questionNumber.textContent = `Question ${index + 1}`;
         resultItem.appendChild(questionNumber);
         
+        // Showsthe question text
         const questionText = document.createElement('div');
         questionText.className = 'question-text';
         questionText.innerHTML = decodeHTMLEntities(result.question);
         resultItem.appendChild(questionText);
         
+        // Creates a container for showing user and correct answers
         const answerInfo = document.createElement('div');
         answerInfo.className = 'answer-info';
         
+        // Shows user's answer (or say they didn’t answer)
         if (result.userAnswer) {
           const userAnswerText = document.createElement('div');
           userAnswerText.className = 'user-answer';
           userAnswerText.innerHTML = `Your answer: <span class="${result.isCorrect ? 'correct-text' : 'incorrect-text'}">${decodeHTMLEntities(result.userAnswer)}</span>`;
           answerInfo.appendChild(userAnswerText);
         } else {
+            // If user didn’t answer this question
           const noAnswer = document.createElement('div');
           noAnswer.className = 'no-answer';
           noAnswer.textContent = 'You did not answer this question';
           answerInfo.appendChild(noAnswer);
         }
         
+        // If the user got it wrong, also show the correct answer
         if (!result.isCorrect) {
           const correctAnswerText = document.createElement('div');
           correctAnswerText.className = 'correct-answer-text';
@@ -287,8 +294,94 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
           answerInfo.appendChild(correctAnswerText);
         }
         
-        resultItem.appendChild(answerInfo);
-        resultsList.appendChild(resultItem);
+        resultItem.appendChild(answerInfo); // Add all answer info to the result item
+        resultsList.appendChild(resultItem); // Add this question's result to the list
       });
       
-      resultsContainer.appendChild(resultsList);
+      resultsContainer.appendChild(resultsList); // Finally, add the results list to the results container
+      
+     // Add restart button
+     const restartButton = document.createElement('button');// Create a new <button> element
+     restartButton.className = 'restart-button'; // Assign a CSS class to the button for styling
+     restartButton.textContent = 'Take Another Quiz'; // Set the text displayed on the button
+     // Add a click event listener to the button that reloads the page when clicked
+     restartButton.addEventListener('click', () => {
+       // Reload the page or reset the quiz state
+       location.reload();
+     });
+     
+     resultsContainer.appendChild(restartButton); // Add the restart button to the results container so it's visible on the page
+     
+     // Add the results to the page
+     this.questionsContainer.appendChild(resultsContainer);
+   }
+ } 
+ // Helper functions to decode HTML
+ function decodeHTMLEntities(text) {
+    const textArea = document.createElement('textarea'); // Creates a text area element
+    textArea.innerHTML = text;  // Sets innerHTML to the encoded text
+    return textArea.value; // Return the decoded value
+  }
+  // Helper function to shuffle elements in an array 
+  function shuffleArray(array) {
+    // Loops through the array from the last element to the second element
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1)); // Pick a random index
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  
+  // Initialize the quiz (handles the start button click)
+  document.addEventListener('DOMContentLoaded', () => {
+    const questionsContainer = document.getElementById('questions-container'); // Container for the questions
+    const navigationContainer = document.getElementById('navigation-container'); // Container for the navigation (next, previous)
+    const progressContainer = document.getElementById('progress-container'); // Container for the progress bar
+    const startButton = document.getElementById('start-quiz'); // Start button element
+  
+    // Creates a QuizManager instance to manage quiz operations
+    const quizManager = new QuizManager(
+      questionsContainer,
+      navigationContainer, 
+      progressContainer
+    );
+    
+    // Adds an event listener for when the start button is clicked
+    startButton.addEventListener('click', async () => {
+      // Get the selected category and difficulty from the dropdown menus
+      //const category = document.getElementById('category-select').value;
+      const difficulty = document.getElementById('difficulty-select').value;
+    
+      
+      // Show loading state 
+      questionsContainer.innerHTML = '<p class="loading">Loading questions...</p>';
+      navigationContainer.innerHTML = ''; // Clears any previous navigation
+      progressContainer.innerHTML = ''; // Clear any previous progress
+      
+      // Hide quiz controls
+      document.querySelector('.quiz-controls').style.display = 'none';
+      
+      // Fetch and display questions based on the selected category and difficulty
+      const questions = await fetchQuizQuestions(difficulty);
+      
+      // Checks if questions were successfully loaded
+      if (questions.length > 0) {
+        // Loads the questions into the quiz manager
+        quizManager.loadQuestions(questions);
+      } else {
+         // If no questions were found, display an error message
+        questionsContainer.innerHTML = '<p class="error">Failed to load questions. Please try again.</p>';
+        
+        // Show retry button
+        const retryButton = document.createElement('button');
+        retryButton.textContent = 'Try Again';
+        retryButton.addEventListener('click', () => {
+          // Show quiz controls again
+          document.querySelector('.quiz-controls').style.display = 'flex';
+          questionsContainer.innerHTML = '';
+        });
+        
+        navigationContainer.appendChild(retryButton);
+      }
+    });
+  });
+  
