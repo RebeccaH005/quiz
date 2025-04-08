@@ -15,12 +15,12 @@
 }
 
 .wrong-answer {
-    background-color:tomato; 
+    background-color:#ff6347; 
     padding: 15px;
 }
 
 .correct-answer {
-    background-color:yellowgreen;
+    background-color:#9acd32;
     padding: 15px;
 }
 
