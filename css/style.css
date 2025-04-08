@@ -591,15 +591,9 @@
     gap: 10px;
     margin-bottom:50px;
   }
-
-  .quiz-controls img {
-    width:700px;
-    margin-top: 25px;
-  }
-
-  .quiz-controls-wrapper #select-difficulty{
-    font-size: 4em;
-    min-width: 100px;
+  #difficulty-select{
+    font-size: 1.1em;
+    padding: 7px 20px;
   }
   #start-quiz{
     padding: 10px 20px;
@@ -609,6 +603,11 @@
     color: white;
     border: none;
     border-radius: 5px;
+  }
+
+  .quiz-controls img {
+    width:700px;
+    margin-top: 25px;
   }
 
   .question-container {
