@@ -1,9 +1,8 @@
 // Function that fetches the quiz questions from provided API 
-
-async function fetchQuizQuestions(category, difficulty, amount = 10) {
+async function fetchQuizQuestions(difficulty, amount = 10) {
     try {
       // Using Open Trivia Database as an example API
-      const url = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=multiple`;
+      const url = `https://opentdb.com/api.php?amount=${amount}&category=17&difficulty=${difficulty}&type=multiple`;
       const response = await fetch(url); // fetches data from the API
       const data = await response.json(); // converts the responses into JSON format
       
@@ -349,8 +348,9 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
     // Adds an event listener for when the start button is clicked
     startButton.addEventListener('click', async () => {
       // Get the selected category and difficulty from the dropdown menus
-      const category = document.getElementById('category-select').value;
+      //const category = document.getElementById('category-select').value;
       const difficulty = document.getElementById('difficulty-select').value;
+    
       
       // Show loading state 
       questionsContainer.innerHTML = '<p class="loading">Loading questions...</p>';
@@ -361,7 +361,7 @@ async function fetchQuizQuestions(category, difficulty, amount = 10) {
       document.querySelector('.quiz-controls').style.display = 'none';
       
       // Fetch and display questions based on the selected category and difficulty
-      const questions = await fetchQuizQuestions(category, difficulty);
+      const questions = await fetchQuizQuestions(difficulty);
       
       // Checks if questions were successfully loaded
       if (questions.length > 0) {
