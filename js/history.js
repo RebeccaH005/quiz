@@ -28,8 +28,8 @@ function nextQuestion(count) {
     document.getElementById("question" + num + "-slide").style.display = "block";
 }
 
-function finish() {
-    document.getElementById("question5-right").style.display = "none";
-    document.getElementById("question5-wrong").style.display = "none";
+function finish(previous) {
+    document.getElementById("question" + previous + "-right").style.display = "none";
+    document.getElementById("question" + previous + "-wrong").style.display = "none";
     document.getElementById("final_score").style.display = "block";
 }
