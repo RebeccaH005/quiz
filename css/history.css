@@ -27,46 +27,12 @@
 }
 
 .background-image {
-    display:block; 
-    width: 100%; 
-    height: 100%;
     padding: 15px;
-}
-
-.start-page-img {
-    background-image: url('img/history.jpg');
-}
-
-.q1-page-img {
-    background-image: url('img/james-I.jpg');
-}
-
-.q2-page-img {
-    background-image: url('img/kilts.jpeg');
-}
-
-.q3-page-img {
-    background-image: url('img/queen-victoria.jpg');
-}
-
-.q4-page-img {
-    background-image: url('img/100-years-war.jpeg');
-}
-
-.q5-page-img {
-    background-image: url('img/macbeth.jpg');
-}
-
-.q6-page-img {
-    background-image: url('img/mary-queen-of-scots.jpg');
-}
-
-.end-page-img {
-    background-image: url('img/congratulations.jpg');
+    background-size: 100% auto;
 }
 
 .title-box {
-    background-color: #00000080; 
+    background-color: #000000bb; 
     border-radius: 10px; 
     padding: 25px; 
     color: white;
@@ -79,9 +45,5 @@
     padding: 25px; 
     color: white;
     margin: 100px
-}
-
-.padding-all {
-    padding: 15px;
 }
 
