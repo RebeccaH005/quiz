@@ -40,14 +40,14 @@
 
         <div class="quiz-container content">
             <div class="quiz-header" id="start_quiz" style="display:block">
-                <h2>History Quiz</h2>
+                <h1>History Quiz</h1>
                 <div class="quiz-controls">
                     <!--<select id="difficulty-select">
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
                         <option value="hard">Hard</option>
                     </select>-->
-                    <button onclick="start_quiz()">Start Quiz</button>
+                    <button class="btn-next" onclick="start_quiz()">Start Quiz</button>
 
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div id="progress-container" class="progress-container"></div>
             
             <!-- Questions will appear here -->
-            <div id="questions-container" class="questions-container">
+            <div id="questions-container" class="questions-container" style="display:none">
                 <div id="question1-slide" class="page">
                     <h1>Question 1</h1>
                     <h2 id="question1">In which town was King James I assassinated in 1437?</h2>
