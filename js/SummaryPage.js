@@ -35,8 +35,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const homeButton = document.getElementById("HomeButtonQuiz");
     if (homeButton) {
-        homeButton.addEventListener("click", function () {
-            window.location.href = "index.html";
-        });
+        // homeButton.addEventListener("click", function () {
+        //     window.location.href = "index.html";
+        // });
+        // document.getElementById("mainLandingPage").addEventListener("click", function () {
+        //     window.location.href = "index.html"; 
+        // });
+        
     }
+});
+
+document.getElementById("mainLandingPage").addEventListener("click", function () {
+    window.location.href = "index.html"; 
 });
