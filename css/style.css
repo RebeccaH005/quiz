@@ -1108,19 +1108,9 @@
     font-size: 1.1em;
   }
 
-  #start-quiz {
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-  }
-
   
   
-  /* Thnak you page styling*/
+  /* Thank you page styling*/
 
   .thankyou-page {
     display:flex;
