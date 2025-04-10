@@ -800,9 +800,8 @@
   }
   
   .restart-button {
-    position:sticky;
-    bottom: 10;
-    left: 50%;
+    position: sticky;
+    bottom: 0;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
