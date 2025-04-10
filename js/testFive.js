@@ -46,8 +46,6 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
                 </div>
             `;
             feedbackToQuestionText.style.color = "#dc3545"; 
-
-          
             localStorage.setItem(`question-counter-local-storage${indexForQuestionLS}_result`, 'incorrect');
            
         }
