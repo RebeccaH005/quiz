@@ -698,7 +698,7 @@
   .progress-container {
     margin-bottom: 20px;
   }
-  
+
   .progress-indicators {
     display: flex;
     list-style: none;
@@ -800,7 +800,9 @@
   }
   
   .restart-button {
-    position: relative;
+    position:sticky;
+    bottom: 10;
+    left: 50%;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
