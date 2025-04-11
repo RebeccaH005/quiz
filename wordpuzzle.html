@@ -62,21 +62,22 @@
                     <span id="timer" class="stat-value">120</span>
                 </div>
             </div>
-                
-            <div class="game-area">
-                <div id="letter-container" class="letter-container"></div>
-                <div id="word-container" class="word-container"></div>
-            </div>
-                
-            <div id="message" class="message"></div>
-                
+
             <div class="controls">
                 <button id="start-button" class="btn primary-btn">Start Game</button>
                 <button id="submit" class="btn action-btn" disabled>Submit Word</button>
                 <button id="shuffle" class="btn action-btn" disabled>Shuffle</button>
                 <button id="clear" class="btn action-btn" disabled>Clear</button>
-                <button id="new-game" class="btn action-btn" disabled>New Game</button>
+                <button id="pause-button" class="btn action-btn" disabled>Pause</button>
             </div>
+                
+            <div class="game-area">
+                <div id="letter-container" class="letter-container"></div>
+                <div><p>Click letters above to form a word.</p></div>
+                <div id="word-container" class="word-container"></div>
+            </div>
+                
+            <div id="message" class="message"></div>
                 
             <div class="results-container">
                 <div class="results-column">
@@ -103,6 +104,7 @@
                     <p>Your final score: <span id="final-score">0</span></p>
                     <p>Words found: <span id="words-found">0</span> out of <span id="total-words">0</span></p>
                     <button id="play-again" class="btn primary-btn">Play Again</button>
+                    <a href="index.html" class="btn primary-btn">Return to Homepage</a>
                 </div>
             </div>
 

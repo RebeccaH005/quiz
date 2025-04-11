@@ -54,6 +54,7 @@ let possibleWords = [];
 let originalLetters = []; // Store the original set of letters
 let letterPositions = []; // Store the positions of letters in the UI
 let gameStarted = false; // Track if game has started
+let isPaused = false; // Track if game is paused
 
 // DOM elements
 const letterContainer = document.getElementById('letter-container');
@@ -61,7 +62,7 @@ const wordContainer = document.getElementById('word-container');
 const submitButton = document.getElementById('submit');
 const shuffleButton = document.getElementById('shuffle');
 const clearButton = document.getElementById('clear');
-const newGameButton = document.getElementById('new-game');
+const pauseButton = document.getElementById('pause-button');
 const startButton = document.getElementById('start-button');
 const scoreElement = document.getElementById('score');
 const timerElement = document.getElementById('timer');
@@ -79,16 +80,29 @@ const messageElement = document.getElementById('message');
 // Helper functions
 function toggleGameControls(enabled) {
   // Disable/enable game controls based on whether the game has started
-  const buttons = [submitButton, shuffleButton, clearButton, newGameButton];
-  buttons.forEach(button => {
+  const actionButtons = [submitButton, shuffleButton, clearButton];
+
+  // Disable main action buttons if game not enabled OR if paused
+  actionButtons.forEach(button => {
     if (button) {
-      button.disabled = !enabled;
+      button.disabled = !enabled || isPaused;
     }
   });
 
-  // Also update the letter container to indicate if letters are clickable
+  if (pauseButton) {
+    pauseButton.disabled = !enabled; // Enabled only when game is running
+  }
+
+  // Update letter container interaction based on pause state
   if (letterContainer) {
-    letterContainer.style.opacity = enabled ? '1' : '0.7';
+    const canInteract = enabled && !isPaused;
+    letterContainer.style.opacity = canInteract ? '1' : '0.6'; // Visual cue
+    // Add/remove a class to prevent clicks more reliably
+    if (canInteract) {
+        letterContainer.classList.remove('paused');
+    } else {
+        letterContainer.classList.add('paused'); // Add a 'paused' class
+    }
   }
 }
 
@@ -249,6 +263,7 @@ function startTimer() {
 function endGame() {
   clearInterval(timerInterval);
   gameStarted = false;
+  isPaused = false; // Reset pause state on game end
   
   // Update game over modal
   finalScoreElement.textContent = score;
@@ -261,6 +276,10 @@ function endGame() {
   
   // Disable game controls
   toggleGameControls(false);
+
+  // Reset button text for the next game start sequence
+  if (pauseButton) pauseButton.textContent = 'Pause';
+  startButton.textContent = 'Play Again'; 
 }
 
 function prepareGame() {
@@ -296,6 +315,11 @@ function startGame() {
   
   // Start or restart the game
   gameStarted = true;
+
+  // Reset pause button text and state
+  if (pauseButton) {
+    pauseButton.textContent = 'Pause';
+  }
   
   // Reset the game state
   prepareGame();
@@ -314,9 +338,32 @@ function startGame() {
   showMessage('Game started! Find words using the given letters.', 'success');
 }
 
+function togglePause() {
+  if (!gameStarted) return; // Can't pause if game isn't running
+
+  isPaused = !isPaused; // Toggle the pause state
+
+  if (isPaused) {
+    // ---- PAUSING ----
+    clearInterval(timerInterval); // Stop the timer!
+    pauseButton.textContent = 'Resume';
+    showMessage('Game Paused', 'warning'); // Show a message
+    // toggleGameControls handles disabling other buttons/letters
+  } else {
+    // ---- RESUMING ----
+    startTimer(); // Restart the timer
+    pauseButton.textContent = 'Pause';
+    showMessage('Game Resumed', 'success'); // Optional resume message
+    // toggleGameControls needs to be called to re-enable things
+  }
+
+  // Update controls enable/disable state based on the new isPaused value
+  toggleGameControls(gameStarted);
+}
+
 // Event handlers
 function handleLetterClick() {
-  if (!gameStarted) return;
+  if (!gameStarted || isPaused) return;
   
   const index = parseInt(this.getAttribute('data-index'));
   const letter = gameLetters[index];
@@ -337,7 +384,7 @@ function handleLetterClick() {
 
 // Button event listeners
 submitButton.addEventListener('click', () => {
-  if (!gameStarted) return;
+  if (!gameStarted || isPaused) return;
   
   const word = getCurrentWord();
   
@@ -393,7 +440,7 @@ submitButton.addEventListener('click', () => {
 });
 
 shuffleButton.addEventListener('click', () => {
-  if (!gameStarted) return;
+  if (!gameStarted || isPaused) return;
   
   gameLetters = shuffleArray(gameLetters);
   updateLetters();
@@ -401,7 +448,7 @@ shuffleButton.addEventListener('click', () => {
 });
 
 clearButton.addEventListener('click', () => {
-  if (!gameStarted) return;
+  if (!gameStarted || isPaused) return;
   
   // Return all letters to the original container
   currentLetters.forEach(letterObj => {
@@ -416,15 +463,7 @@ clearButton.addEventListener('click', () => {
   showMessage('Word cleared!', 'warning');
 });
 
-newGameButton.addEventListener('click', () => {
-  if (!gameStarted) {
-    startGame(); // Start if not started
-  } else {
-    // Reset game without showing dialog
-    prepareGame();
-    startTimer();
-  }
-});
+pauseButton.addEventListener('click', togglePause);
 
 playAgainButton.addEventListener('click', () => {
   gameOverModal.style.display = 'none';
@@ -433,13 +472,7 @@ playAgainButton.addEventListener('click', () => {
 
 // Start button event listener
 startButton.addEventListener('click', () => {
-  if (!gameStarted) {
     startGame();
-  } else {
-    // If the game is already started, this acts as a reset button
-    clearInterval(timerInterval);
-    startGame();
-  }
 });
 
 // Initialize the game

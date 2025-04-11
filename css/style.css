@@ -254,11 +254,17 @@
 		page-break-after: avoid;
 	  }
 	}
+
+  body {
+    background-color: #f0f2f5;
+    margin:0;
+  }
   
   /* Homepage Styles */
   
   header {
     width: 100%;
+    background-color: #fff;
   }
 
   .header-container {
@@ -434,6 +440,8 @@
   }
 
   .nav-item {
+      display:flex;
+      flex-direction: column;
       background-color: white;
       border-radius: 10px;
       padding: 30px;
@@ -453,13 +461,15 @@
   }
 
   .nav-item p {
-      margin-bottom: 20px;
+      margin-bottom: auto;
+      padding-bottom: 20px;
       color: #666;
   }
 
   .nav-item a {
       display: inline-block;
       padding: 10px 20px;
+      margin-top: auto;
       background-color: var(--button-color);
       color: white;
       text-decoration: none;
@@ -575,7 +585,8 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: Roboto, sans-serif;
+
   }
   
 
@@ -845,7 +856,7 @@
     background-color: var(--color1);
     padding: 10px 30px;
     margin-bottom:25px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: var(--background-color);
   }
 
@@ -867,11 +878,12 @@
 
   .stat-label {
     font-weight: bold;
+    font-size: 1.6em;
     margin-bottom: 5px;
   }
 
   .stat-value {
-    font-size: 24px;
+    font-size: 1.8em;
     font-weight: bold;
     color: var(--text-color);
   }
@@ -881,6 +893,14 @@
     margin-bottom: 25px;
   }
 
+  .game-area p {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+
+  }
+
   .letter-container, .word-container {
     display: flex;
     justify-content: center;
@@ -888,18 +908,22 @@
     padding: 10px;
     min-height: 40px;
     max-width: 600px;
-    /*border: 2px dashed var(--text-color);*/
     background-color: var(--color2);
     border-radius: 5px;
   }
 
+  .letter-container.paused {
+    pointer-events: none; /* Disables click events on the container and its children */
+  }
+
   .letter-container span, .word-container span {
     display: inline-block;
-    margin: 0 5px;
-    padding: 5px 10px;
+    margin: 5px 10px;
+    padding: 10px 15px;
     border: 1px solid var(--color4);
     color: var(--text-color);
     border-radius: 5px;
+    box-shadow: 2px 2px 2px #333333;
     font-size: 24px;
     font-weight: bold;
     background-color: #fff;
@@ -1047,6 +1071,10 @@
   #final-score, #words-found, #total-words {
     font-weight: bold;
     color: var(--button-color);
+  }
+
+  a.btn {
+    text-decoration: none;
   }
 
   /* Responsive Adjustments */
