@@ -417,7 +417,7 @@
   /* Navigation card styles for the homepage */
 
   .full-nav {
-      min-height: 100vh;
+      min-height: 70vh;
       background-color: var(--background-color);
       padding: 80px 20px;
   }
@@ -460,10 +460,15 @@
       margin-bottom: 15px;
   }
 
+  .nav-item img {
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
   .nav-item p {
       margin-bottom: auto;
       padding-bottom: 20px;
-      color: #666;
+      color: var(--text-color);
   }
 
   .nav-item a {
