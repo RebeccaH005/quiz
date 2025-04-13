@@ -10,7 +10,7 @@ const letterSets = [
     },
     {
       "letters": "DEINRT",
-      "words": ["dent", "diet", "dine", "dire", "dirt", "din", "end", "nerd", "nest", "net", "ride", "rein", "rent", "rite", "tied", "tier", "tin", "tine", "tire", "trend", "tried", "trine", "diner", "trident", "inter", "tide", "tend", "tern", "tinder", "tined", "trend", "tried", "dint", "nite", "tern", "rind", "tine", "tire", "rite", "den", "die", "dier", "dir", "dit", "dit", "ident", "ind", "ired", "nerd", "niet", "nit", "rei", "ret", "rid", "tie", "tir", "tri"]
+      "words": ["dent", "diet", "dine", "dire", "dirt", "din", "end", "nerd", "nest", "net", "ride", "rein", "rent", "rite", "tied", "tier", "tin", "tine", "tire", "trend", "tried", "trine", "diner", "trident", "inter", "tide", "tend", "tern", "tinder", "tined", "trend", "tried", "dint", "nite", "tern", "rind", "tine", "tire", "rite", "den", "die", "dier", "dir", "dit", "dit", "ident", "ind", "ired", "nerd", "niet", "nit", "rei", "ret", "rid", "tie", "tir", "tri", "red"]
     },
     {
       "letters": "GHINOS",
