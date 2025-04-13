@@ -16,7 +16,7 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
                <div class = "correct-answer-quiz">well done! you nailed it!</div>
           <div class="feedback-text">
          The Eastern Antarctic Plateau is where thermometers fear to tread. Temperatures in this region are known to plunge to sub minus 90C! Should you be unfortunate enough to find yourself here, we recommend that you layer up, and that a hot water bottle at bedtime is an essential.
-    </div></div>
+             </div></div>
             `;
             feedbackToQuestionText.style.color = "#28a745"; 
 
@@ -29,7 +29,7 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
               <div class = "feedback-container-for-text">
                 <div class =" incorrect-answer-quiz">North Ice Greenland isn’t the right answer! </div>
                 <div class="feedback-text">
-                 -------
+                North Ice in Greenland is very, very cold! with annual averages around -20°C (-4°F). However, there is even a colder place which is The Eastern Antarctic Plateau. Bring your thermals!!!
                 </div></div>
             `;
             feedbackToQuestionText.style.color = "#dc3545"; 

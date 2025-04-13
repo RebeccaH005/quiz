@@ -11,7 +11,7 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
                 <div class = "feedback-container-for-text">
                     <div class = "correct-answer-quiz">well done! you nailed it!</div>
                     <div class="feedback-text">
-                    -----------
+                    Vatican City comes in first place for diminutiveness. At just over 0.4 square kilometers, I reckon you could paint it with half a can of Dulux before breakfast. With fewer than 1000 residents, however, there is plenty of room for everyone (once the tourists have gone home for the evening, that is).
                     </div>
                 </div>
             `;
@@ -25,7 +25,7 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
                 <div class = "feedback-container-for-text">
                     <div class = "incorrect-answer-quiz">Liechtenstein isn’t the right answer!</div>
                     <div class="feedback-text">
-            -----------
+                     Liechtenstein is next up in third place. It is truly gargantuan in comparison to Vatican City and Monaco, however, squeezing in at roughly 160 square kilometers. In contrast to its small size, the GDP is far from tiny at 7.362 billion USD!
                     </div>
                 </div>
             `;
@@ -41,7 +41,7 @@ document.querySelectorAll(".testOneAnswers-container img").forEach(img => {
                 <div class = "feedback-container-for-text">
                     <div class = "incorrect-answer-quiz">Monaco isn’t the right answer!</div>
                     <div class="feedback-text">
-                     ---------
+                    Monaco is the Audrey Hepburn of countries, being glamorous and tiny! At just over 2 square kilometers, at least it’s not the smallest country in the world. It’s still got room enough for all those luxury yachts and casinos!
                     </div>
                 </div>
             `;
