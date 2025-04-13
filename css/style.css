@@ -12,6 +12,7 @@
     --accent-color: #e74c3c;
     --text-color: #333333;
     --background-color: #f5f5f5;
+    --background-color-2: #f9f9f9;
     --color1: #143642;
     --color2: #EC9A29;
     --color3: #A8201A;
@@ -305,7 +306,7 @@
 
   .search input[type="submit"]{
     background-color: var(--button-color);
-    color: white;
+    color: var(--background-color);
     border-radius: 5px;
     border: none;
     padding: 8px 20px;
@@ -442,7 +443,7 @@
   .nav-item {
       display:flex;
       flex-direction: column;
-      background-color: white;
+      background-color: #fff;
       border-radius: 10px;
       padding: 30px;
       text-align: center;
@@ -476,7 +477,7 @@
       padding: 10px 20px;
       margin-top: auto;
       background-color: var(--button-color);
-      color: white;
+      color: var(--background-color);
       text-decoration: none;
       border-radius: 5px;
       transition: background-color 0.3s;
@@ -559,6 +560,7 @@
   }
 
   /* Mobile Responsive */
+
   @media screen and (max-width: 768px) {
       .nav-links {
           position: fixed;
@@ -594,7 +596,6 @@
 
   }
   
-
   /* Science quiz styling  */
 
   .quiz-header {
@@ -623,6 +624,7 @@
     padding: 7px 20px;
     border-radius: 5px;
   }
+
   #start-quiz{
     padding: 10px 20px;
     font-size: 1em;
@@ -637,6 +639,7 @@
     width:700px;
     margin-top: 25px;
   }
+
   .quiz-controls p{
     font-size: 1.08em;
     text-align: center;
@@ -863,15 +866,17 @@
     margin-bottom:25px;
     font-size: 1.2em;
     color: var(--background-color);
+    border-radius: 5px;
   }
 
   /* Puzzle Stats */
+
   .game-stats {
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: var(--background-color);
+    background-color: var(--background-color-2);
     border-radius: 5px;
   }
 
@@ -894,11 +899,19 @@
   }
 
   /* Puzzle Area */
-  .game-area {
+
+  .letters-area {
     margin-bottom: 25px;
   }
 
-  .game-area p {
+  .game-area {
+    background-color: var(--background-color-2);
+    padding:20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+
+  .letters-area p {
     text-align: center;
     font-size: 1.2em;
     font-weight: bold;
@@ -942,6 +955,7 @@
   }
 
   /* Controls */
+
   .controls {
     display: flex;
     justify-content: center;
@@ -983,6 +997,7 @@
   }
 
   /* Message */
+
   .message {
     padding: 10px;
     margin: 10px 0;
@@ -1004,6 +1019,7 @@
   }
 
   /* Results */
+
   .results-container {
     display: flex;
     flex-wrap: wrap;
@@ -1016,7 +1032,7 @@
     min-width: 150px;
     min-height: 300px;
     padding: 10px;
-    background-color: #f9f9f9;
+    background-color: var(--background-color-2);
     border-radius: 5px;
     margin:0 20px;
   }
@@ -1042,6 +1058,7 @@
   }
 
   /* Game Over Modal */
+
   .modal {
     display: none;
     position: fixed;
@@ -1083,6 +1100,7 @@
   }
 
   /* Responsive Adjustments */
+
   @media (max-width: 600px) {
     .results-container {
         flex-direction: column;
@@ -1097,7 +1115,6 @@
         margin: 5px 0;
     }
   }
-
 
   /*   Feedback page styling   */
 
@@ -1128,6 +1145,7 @@
     font-size: 1em;
 
   }
+
   .feedback input[type="text"], 
   .feedback textarea
   {
@@ -1136,14 +1154,13 @@
     border: 2px black dotted;
     font-size: 1em;
     }
+
   .feedback label{
     display: block;
     margin: 25px 3px 0px 5px;
     font-weight: 700;
     font-size: 1.1em;
   }
-
-  
   
   /* Thank you page styling*/
 
@@ -1155,6 +1172,7 @@
   .thankyou-page-left img {
     max-width: 350px;
   }
+
   .thankyou-page-right {
     padding: 10px 50px 0 50px;
     font-size: 1.6em;
@@ -1165,6 +1183,7 @@
   .thankyou-page-right h1 {
     text-align: center;
   }
+
   @media screen and (max-width: 768px) {
     .thankyou-page {
       flex-direction: column;
