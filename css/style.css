@@ -339,11 +339,11 @@
     position: relative;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
   }
 
-  .hero::before {
+  /*.hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -352,15 +352,15 @@
     height: 100%;
     background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.9));;
     z-index: 1;
-  }
+  }*/
 
   .hero-container {
     display: flex;
     flex-direction: column;
-    max-width: 1200px;
-    width: 100%;
+    /*max-width: 1200px;*/
+    width: 50%;
     padding: 0 20px;
-    margin-top: 20rem;
+    margin-top: 15rem;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -368,30 +368,32 @@
   }
 
   .hero-container h1 {
-      font-size: 3.5em;
-      background-color: rgba(0, 0, 0, 0.4);
-      border-radius: 10px;
+      font-size: 3rem;
+      color: var(--text-color);
+    /*  background-color: var(--background-color);
+      border-radius: 10px; */
   }
 
   .scroll-down-button {
     text-align: center;
-    margin-top: 5rem;
+    margin-top: 10rem;
   }
 
   .scroll-btn {
       display: inline-block;
       padding: 12px 30px;
-      background-color: var(--button-color);
-      color: white;
+      background-color: var(--color2);
+      color: var(--text-color);
       text-decoration: none;
-      border-radius: 50px;
-      font-size: 1.2rem;
+      border-radius: 10px;
+      font-size: 1.4rem;
       transition: transform 0.3s, background-color 0.3s;
   }
 
   .scroll-btn:hover {
       transform: translateY(-3px);
-      background-color: var(--button-hover-color);
+      background-color: var(--color3);
+      color: var(--background-color);
   }
 
   /* Animated down arrow */
@@ -399,8 +401,8 @@
       display:block;
       width: 30px;
       height: 30px;
-      border-right: 4px solid white;
-      border-bottom: 4px solid white;
+      border-right: 4px solid var(--text-color);
+      border-bottom: 4px solid var(--text-color);
       animation: arrow-bounce 2s infinite;
       cursor: pointer;
       z-index: 1;
