@@ -1,15 +1,15 @@
 
 body {
-    display: flex;
-    background-color: #ffffff;
+    /* display: flex; */
+    /* background-color: #ffffff; */
     justify-content: flex-start; 
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
     flex-direction: column;
     text-align: center;
     margin: 0;
     padding: 0;
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
 }
 
 
