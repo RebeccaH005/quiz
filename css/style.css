@@ -356,12 +356,10 @@
 
   .hero-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: column;
-    /*max-width: 1200px;*/
     width: 50%;
     padding: 0 20px;
-    margin-top: 15rem;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -371,8 +369,6 @@
   .hero-container h1 {
       font-size: 3rem;
       color: var(--text-color);
-    /*  background-color: var(--background-color);
-      border-radius: 10px; */
   }
 
   .scroll-down-button {
@@ -1039,10 +1035,10 @@
   /* Results */
 
   .results-container {
-    display: flex;
+    /*display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-between;
+    justify-content: space-between;*/
   }
 
   .results-column {
