@@ -17,6 +17,11 @@ function question_right(count) {
     score = score + 1;
     document.getElementById("question" + num + "-right").style.display = "block";
     document.getElementById("question" + num + "-slide").style.display = "none";
+    if (score > 2) {
+        document.getElementById("result_text").innerHTML = "Well done! A true historian in the making - your grandparents will be proud!";
+    } else {
+        document.getElementById("result_text").innerHTML = "Yikes! May want to review your knowledge before visiting your grandparents.";
+    }
     document.getElementById("result").innerHTML = score;
     console.log(score);
 }
