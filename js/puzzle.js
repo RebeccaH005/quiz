@@ -42,6 +42,7 @@ const letterSets = [
     }
   ];
 
+
 // Game state variables
 let currentSetIndex;
 let gameLetters = [];
@@ -55,6 +56,7 @@ let originalLetters = []; // Store the original set of letters
 let letterPositions = []; // Store the positions of letters in the UI
 let gameStarted = false; // Track if game has started
 let isPaused = false; // Track if game is paused
+
 
 // DOM elements
 const letterContainer = document.getElementById('letter-container');
@@ -77,8 +79,12 @@ const totalWordsElement = document.getElementById('total-words');
 const playAgainButton = document.getElementById('play-again');
 const messageElement = document.getElementById('message');
 
+
 // Helper functions
+
+// Enable/Disable Game Control Buttons
 function toggleGameControls(enabled) {
+
   // Disable/enable game controls based on whether the game has started
   const actionButtons = [submitButton, shuffleButton, clearButton];
 
@@ -90,13 +96,14 @@ function toggleGameControls(enabled) {
   });
 
   if (pauseButton) {
-    pauseButton.disabled = !enabled; // Enabled only when game is running
+    pauseButton.disabled = !enabled; // Pause button is only enabled when game is running
   }
 
   // Update letter container interaction based on pause state
   if (letterContainer) {
     const canInteract = enabled && !isPaused;
     letterContainer.style.opacity = canInteract ? '1' : '0.6'; // Visual cue
+
     // Add/remove a class to prevent clicks more reliably
     if (canInteract) {
         letterContainer.classList.remove('paused');
@@ -106,12 +113,16 @@ function toggleGameControls(enabled) {
   }
 }
 
+// Select a random letter set
 function selectRandomLetterSet() {
+
   currentSetIndex = Math.floor(Math.random() * letterSets.length);
   return letterSets[currentSetIndex].letters.split('');
 }
 
+// Shuffle letters in a letter set
 function shuffleArray(array) {
+
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -120,7 +131,9 @@ function shuffleArray(array) {
   return newArray;
 }
 
+// Refresh the display of available letters
 function updateLetters() {
+
   // Clear the letter container
   letterContainer.innerHTML = '';
   
@@ -147,7 +160,9 @@ function updateLetters() {
   });
 }
 
+// Display the letters that were selected to form a word
 function updateWordContainer() {
+
   // Clear the word container
   wordContainer.innerHTML = '';
   
@@ -157,6 +172,7 @@ function updateWordContainer() {
     letterElement.textContent = letter.letter;
     
     letterElement.addEventListener('click', () => {
+
       // Return the letter to the original container
       returnLetterToOriginalContainer(index);
     });
@@ -165,7 +181,9 @@ function updateWordContainer() {
   });
 }
 
+// Return letter to the letter set container
 function returnLetterToOriginalContainer(index) {
+
   const letterObj = currentLetters[index];
   
   // Add the letter back to the game letters
@@ -179,15 +197,19 @@ function returnLetterToOriginalContainer(index) {
   updateWordContainer();
 }
 
+// Extract the current word that is formed from the selected letters
 function getCurrentWord() {
   return currentLetters.map(letterObj => letterObj.letter).join('');
 }
 
+// Check if a word is a valid word according to the game's dictionary for the current letter set
 function isValidWord(word) {
   return letterSets[currentSetIndex].words.includes(word.toLowerCase());
 }
 
+// Update the score after successful word guess 
 function updateScore(word) {
+
   // Award points based on word length
   const wordLength = word.length;
   let points = 0;
@@ -211,7 +233,9 @@ function updateScore(word) {
   scoreElement.textContent = score;
 }
 
+// Add word to corresponding result column
 function addWordToResults(word) {
+
   const wordLength = word.length;
   const listItem = document.createElement('li');
   listItem.textContent = word;
@@ -232,7 +256,9 @@ function addWordToResults(word) {
   }
 }
 
+// Display feedback messages during gameplay
 function showMessage(text, type) {
+
   // Set message text
   messageElement.textContent = text;
   
@@ -249,7 +275,9 @@ function showMessage(text, type) {
   }, 3000);
 }
 
+// Start game timer
 function startTimer() {
+
   timerInterval = setInterval(() => {
     timer--;
     timerElement.textContent = timer;
@@ -260,7 +288,9 @@ function startTimer() {
   }, 1000);
 }
 
+// Finish the game
 function endGame() {
+
   clearInterval(timerInterval);
   gameStarted = false;
   isPaused = false; // Reset pause state on game end
@@ -282,7 +312,9 @@ function endGame() {
   startButton.textContent = 'Play Again'; 
 }
 
+// Prepare the game
 function prepareGame() {
+
   // Set up the game but don't start timer
   originalLetters = selectRandomLetterSet();
   gameLetters = [...originalLetters];
@@ -309,7 +341,9 @@ function prepareGame() {
   toggleGameControls(false);
 }
 
+// Start the game
 function startGame() {
+
   // Change start button to show "Reset Game" and update its behavior
   startButton.textContent = 'Reset Game';
   
@@ -338,23 +372,29 @@ function startGame() {
   showMessage('Game started! Find words using the given letters.', 'success');
 }
 
+// Handle pause state
 function togglePause() {
-  if (!gameStarted) return; // Can't pause if game isn't running
 
-  isPaused = !isPaused; // Toggle the pause state
+  // Disable pause if game isn't running
+  if (!gameStarted) return; 
+
+  // Toggle the pause state
+  isPaused = !isPaused; 
 
   if (isPaused) {
-    // ---- PAUSING ----
-    clearInterval(timerInterval); // Stop the timer!
+    // Pause the game
+    // Stop the timer!
+    clearInterval(timerInterval); 
     pauseButton.textContent = 'Resume';
-    showMessage('Game Paused', 'warning'); // Show a message
-    // toggleGameControls handles disabling other buttons/letters
+    // Show a game pause message
+    showMessage('Game Paused', 'warning'); 
   } else {
-    // ---- RESUMING ----
-    startTimer(); // Restart the timer
+    // Resume the game
+    // Restart the timer
+    startTimer(); 
     pauseButton.textContent = 'Pause';
-    showMessage('Game Resumed', 'success'); // Optional resume message
-    // toggleGameControls needs to be called to re-enable things
+    // Show a game resume message
+    showMessage('Game Resumed', 'success'); 
   }
 
   // Update controls enable/disable state based on the new isPaused value
@@ -383,6 +423,8 @@ function handleLetterClick() {
 }
 
 // Button event listeners
+
+// Submit button event listener
 submitButton.addEventListener('click', () => {
   if (!gameStarted || isPaused) return;
   
@@ -439,6 +481,7 @@ submitButton.addEventListener('click', () => {
   }
 });
 
+// Shuffle button event listener
 shuffleButton.addEventListener('click', () => {
   if (!gameStarted || isPaused) return;
   
@@ -447,6 +490,7 @@ shuffleButton.addEventListener('click', () => {
   showMessage('Letters shuffled!', 'success');
 });
 
+// Clear button event listener
 clearButton.addEventListener('click', () => {
   if (!gameStarted || isPaused) return;
   
@@ -463,8 +507,10 @@ clearButton.addEventListener('click', () => {
   showMessage('Word cleared!', 'warning');
 });
 
+// Pause button event listener
 pauseButton.addEventListener('click', togglePause);
 
+// Play Again button event listener
 playAgainButton.addEventListener('click', () => {
   gameOverModal.style.display = 'none';
   startGame();
