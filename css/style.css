@@ -299,6 +299,7 @@
     display: flex;
     margin-top: 15px;
   }
+
   .search a {
     margin-right: 20px;
     margin-top: 8px;
@@ -325,6 +326,17 @@
   border: 2px black dotted;
   font-size: 1em;
   }
+
+  @media screen and (max-width: 768px) {
+    .search {
+      flex-direction:column;
+    }
+
+    .search form {
+      display:flex;
+      flex-direction: column;
+    }
+  }
   
 
   /* Hero section styles */
@@ -342,17 +354,6 @@
     justify-content: left;
     align-items: left;
   }
-
-  /*.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.9));;
-    z-index: 1;
-  }*/
 
   .hero-container {
     display: flex;
@@ -418,7 +419,7 @@
   @media screen and (max-width: 768px) {
     .hero-container h1 {
       font-size: 2em;
-  }
+    }
   }
 
   /* Navigation card styles for the homepage */
@@ -563,6 +564,7 @@
       display: none;
       cursor: pointer;
       font-size: 1.5rem;
+      margin-right: 2rem;
   }
 
   /* Mobile Responsive */
